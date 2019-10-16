@@ -29,7 +29,7 @@ public class TextGame
 
 	if (input != 'a' && input != 's' &&  input != 'd' && input != 'w')
 	continue;
-
+	System.out.print("\033[H\033[2J");
 	if (m1.canMovePlayer(input))
 		m1.Player.move(input);	
 	}
