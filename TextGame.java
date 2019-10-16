@@ -21,9 +21,9 @@ public class TextGame
 	Scanner playerInput = new Scanner (System.in);
 	Map m1 = new Map();
 
-	textapp.isRunning = true;
+	myapp.isRunning = true;
 
-	while(textapp.isRunning)
+	while(myapp.isRunning)
 	{
 	char input = playerInput.nextChar();
 
