@@ -6,12 +6,12 @@ public class TextGame
 
 	public void setIsRunning(boolean a)
 	{
-	isRunning = a;
+		isRunning = a;
 	}
 
 	public boolean getIsRunning()
 	{
-	return isRunning;
+		return isRunning;
 	}
 
 	public static void main (String[] args)
@@ -25,13 +25,18 @@ public class TextGame
 
 	while(myapp.isRunning)
 	{
-	char input = playerInput.nextChar();
-
-	if (input != 'a' && input != 's' &&  input != 'd' && input != 'w')
-	continue;
-	System.out.print("\033[H\033[2J");
-	if (m1.canMovePlayer(input))
-		m1.Player.move(input);	
+		m1.printMap();
+		char input = playerInput.next().charAt(0); 
+		//System.out.print("\033[H\033[2J");
+		
+		if (input != 'a' && input != 's' &&  input != 'd' && input != 'w')
+		continue;
+		
+		if (m1.canMoveCharacter(input))
+			{
+				m1.getPlayer().Move(input);
+				
+			}
 	}
 }
 }
