@@ -11,6 +11,10 @@ public class Character extends GameObject{
 		setEvading(false);
 	}
 	
+	public String toString()
+	{
+		return super.toString();
+	}
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub

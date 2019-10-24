@@ -6,12 +6,14 @@ public class Pacman extends Character {
 	
 	//instance variables
 	private int lives;
-	
+	private String name;
+
 	//constructors
 	//can constructother pacman qualities here later
 	public Pacman(Location toCopy) {
 		super(toCopy);
 		setLives(3);
+		setName("Pacman");
 	}
 
     //Methods
@@ -41,6 +43,18 @@ public class Pacman extends Character {
 	 */
 	public void setLives(int lives) {
 		this.lives = lives;
+	}
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String toString()
+	{
+		return name +" " + super.toString();
+		
 	}
 
 }

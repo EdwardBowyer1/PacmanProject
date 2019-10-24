@@ -5,8 +5,16 @@ public class Map {
 	//Instance variables-------------------------------------------
 	private Pacman player;
 	//need to add the rest of the gameobjects
-	private int[][] grid = { {1,1,1,1,1,1,1,1,1,1,1},{1,0,0,0,0,0,0,0,0,0,1},{1,0,0,0,0,0,0,0,0,0,1},{1,0,0,0,0,0,0,0,0,0,1},{1,0,0,0,0,0,0,0,0,0,1},
-								{1,0,0,0,0,0,0,0,0,0,1},{1,0,0,0,0,0,0,0,0,0,1},{1,0,0,0,0,0,0,0,0,0,1},{1,0,0,0,0,0,0,0,0,0,1},{1,1,1,1,1,1,1,1,1,1,1}};
+	private int[][] grid = { {1,1,1,1,1,1,1,1,1,1,1},
+							 {1,0,0,0,0,0,0,0,0,0,1},
+							 {1,0,0,0,0,0,0,0,0,0,1},
+							 {1,0,0,0,0,0,0,0,0,0,1},
+							 {1,0,0,0,0,0,0,0,0,0,1},
+							 {1,0,0,0,0,0,0,0,0,0,1},
+							 {1,0,0,0,0,0,0,0,0,0,1},
+							 {1,0,0,0,0,0,0,0,0,0,1},
+							 {1,0,0,0,0,0,0,0,0,0,1},
+					 		 {1,1,1,1,1,1,1,1,1,1,1}};
 	private int height;
 	private int width;
 	private Location startLocation;
@@ -14,7 +22,7 @@ public class Map {
 	//Constructors-------------------------------------------------
 	public Map()
 	{
-		setHeight(grid.length); //consider making a wraooer class for length;
+		setHeight(grid.length); //consider making a wrapper class for length;
 		setWidth(grid[0].length);
 		startLocation = new Location((width-1)/2, (height-1)/2);
 		player = new Pacman(startLocation);
@@ -22,28 +30,34 @@ public class Map {
 	//Methods------------------------------------------------------
 	
 	// Argument is the input from console 
-	// Returns whether or not character is next boarder or '1'--> boundary
+	
+	// Returns true if the space in front of the character is empty (not a 1 on the grid).
+	
 		public boolean canMoveCharacter(char directionInput) 
 		{
-			int PacX = player.getCoordinate().getXlocation();
+			int PacX = player.getCoordinate().getXlocation() ;
 			int PacY = player.getCoordinate().getYlocation();
 			if(directionInput == 'w')
 			{
-				if(PacY >= 1 && grid[PacX][PacY-1] != 1)
+				System.out.println("Next grid element: " +grid[PacX][PacY-1]); //meant to debug the issue of 
+																			   //not being able to access block before wall(width). 
+				if(grid[PacX][PacY-1] != 1)
 				{
 					return true;
 				}
 			}
 			else if(directionInput == 's')
 			{
-				if(PacY <= height-3 && grid[PacX][PacY+1] != 1)
+				System.out.println("Next grid element: " +grid[PacX][PacY+1]);
+				if(grid[PacX][PacY+2] != 1)
 				{
 					return true;
 				}
 			}
 			else if(directionInput == 'a')
 			{
-				if(PacX >= 1 && grid[PacX-1][PacY] != 1)
+				System.out.println("Next grid element: " +grid[PacX-1][PacY]);
+				if(grid[PacX-1][PacY] != 1)
 				{
 					return true;
 				}
@@ -51,7 +65,8 @@ public class Map {
 		
 			else if(directionInput == 'd')
 			{
-				if(PacX <= width-2 && grid[PacX+1][PacY] != 1)
+				System.out.println("Next grid element: " +grid[PacX+1][PacY]);
+				if(grid[PacX+1][PacY] != 1)
 				{
 					return true;
 				}
@@ -61,19 +76,20 @@ public class Map {
 		
 		public void printMap()
 		{
+			//need the character coordintes of pacman, setting local variable
 			int PacX = player.getCoordinate().getXlocation();
 			int PacY = player.getCoordinate().getYlocation();
+			 //these loops print out the grid to whatever we want to graphically output
 			for(int i = 0; i< height; i++)
 			{
 				for(int j = 0; j< width; j++)
 				{
-					if (j == PacX && i == PacY)
+					if (j == PacX && i == PacY) //must check this first
 						System.out.print('C');
 					else if(grid[i][j] == 0)
 						System.out.print(' ');
 					else if(grid[i][j] == 1)
 						System.out.print('#');
-
 				}
 				System.out.println();
 			}

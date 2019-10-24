@@ -26,6 +26,7 @@ public class TextGame
 	while(myapp.isRunning)
 	{
 		m1.printMap();
+		System.out.println(m1.getPlayer().toString());
 		char input = playerInput.next().charAt(0); 
 		//System.out.print("\033[H\033[2J");
 		
@@ -35,7 +36,6 @@ public class TextGame
 		if (m1.canMoveCharacter(input))
 			{
 				m1.getPlayer().Move(input);
-				
 			}
 	}
 }

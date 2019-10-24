@@ -30,11 +30,15 @@ public class Location {
 			return false;
 	}
 		
-	public void changeLocation(int xChange, int yChange) //consider changing to protected instead
+	protected void changeLocation(int xChange, int yChange) //consider changing to protected instead
 		{
 			setXlocation(xlocation + xChange);
 			setYlocation(ylocation + yChange);
 		}
+	public String toString()
+	{
+		return "Coordinate: (" + xlocation + ", " + ylocation + ")";
+	}
 	//getters and setters
 	public int getXlocation() {
 		return xlocation;

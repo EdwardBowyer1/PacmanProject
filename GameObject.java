@@ -10,7 +10,13 @@ public class GameObject {
 	{
 		setCoordinate(toCopy);
 	}
+	
+	public String toString()
+	{
+		return coordinate.toString();
+	}
 
+	//getters/setters
 	/**
 	 * @return the coordinate of the gameobject
 	 */
