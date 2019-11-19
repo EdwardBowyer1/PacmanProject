@@ -41,8 +41,8 @@ public class Cell extends GameObject
 //This is what is called to draw the cell
 	public Node getNode() 
 	{
-		int xlocation = getCoordinate().getXlocation(); //x location in pixels. (x * cell_width)
-		int ylocation = getCoordinate().getXlocation();
+		double xlocation = getCoordinate().getPixelW(); //x location in pixels. (x * cell_width)
+		double ylocation = getCoordinate().getPixelH();
 		
 		if(type == Constants.OBSTACLE) //if type is obstacle, cell is the image of the wall
 		{
