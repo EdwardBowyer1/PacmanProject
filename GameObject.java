@@ -1,14 +1,15 @@
 
-public class GameObject {
+public abstract class GameObject {
 	
 	//Instance
 	private Location coordinate;
+	
 	
 	//constructor
 	
 	public GameObject(Location toCopy)
 	{
-		setCoordinate(toCopy);
+		setCoordinate(toCopy); 
 	}
 	
 	public String toString()

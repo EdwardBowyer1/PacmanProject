@@ -1,60 +1,141 @@
+import javafx.scene.Node;
+import javafx.scene.image.ImageView;
 
 public class Pacman extends Character {
 
-	public final int dX = 1;
-	public final int dY = 1;
+	private int xlocation  = getCoordinate().getXlocation(); //X and Y locations 
+	private int ylocation  = getCoordinate().getYlocation();
 	
-	//instance variables
-	private int lives;
-	private String name;
-
-	//constructors
-	//can constructother pacman qualities here later
-	public Pacman(Location toCopy) {
-		super(toCopy);
-		setLives(3);
-		setName("Pacman");
-	}
-
-    //Methods
-	//to control movement
+	private static int score;
+	private static Node node;
+	public static ImageView PacImage = new ImageView(Constants.GIFPacRight);
 	
-    public void Move(char input)
-    {
-        if (input == 'a')
-        	getCoordinate().changeLocation(-dX,0);
-        else if (input == 'w')
-        	getCoordinate().changeLocation(0,-dY);
-        else if (input == 's')
-        	getCoordinate().changeLocation(0,dY);
-        else if (input == 'd')
-        	getCoordinate().changeLocation(dX,0);
-    }
-
-	/**
-	 * @return the lives
-	 */
-	public int getLives() {
-		return lives;
-	}
-
-	/**
-	 * @param lives the lives to set
-	 */
-	public void setLives(int lives) {
-		this.lives = lives;
-	}
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-	public String toString()
+	
+//----constructors---------------------------------------------------
+	
+	public Pacman(Location toCopy) 
 	{
-		return name +" " + super.toString();
-		
+		super(toCopy); 
+		score = 0;
 	}
+
+	
+
+//----Methods----------------------------------------------------------------
+	
+	public boolean moveUp()
+	{
+		//Checks one block above Pacman before moving
+		if (Grid.getCell(xlocation-1, ylocation).getType() == Constants.OBSTACLE)
+			return false;
+		
+		//Constants.PACMAN_IMAGE.setRotate(90+180);
+		PacImage.setRotate(-90);
+		
+		//Changes location of Pacman (moves him up by one)
+		Location temp = new Location(xlocation-1, ylocation);
+		super.setCoordinate(temp);
+		
+		if (Grid.getCell(xlocation, ylocation).getType() == Constants.FOOD)
+		{
+			Pacman.score++; //Increase the score
+			Grid.getCell(xlocation, ylocation).setType(Constants.EMPTY);
+		}    	
+		MapGenerator.redrawMap();
+    	
+    	return true;
+	
+	}
+	
+	public boolean moveDown()
+	{
+		//Checks if location below Pacman is an OBSTACLE
+		if (Grid.getCell(xlocation+1, ylocation).getType() == Constants.OBSTACLE)
+			return false;
+		
+		PacImage.setRotate(90);
+		
+		Location temp = new Location(xlocation+1, ylocation);
+		super.setCoordinate(temp);
+		
+		if (Grid.getCell(xlocation, ylocation).getType() == Constants.FOOD)
+		{
+			Pacman.score++;
+			Grid.getCell(xlocation, ylocation).setType(Constants.EMPTY);
+		}
+    	MapGenerator.redrawMap();
+    	
+    	return true;
+
+	}
+	
+	public boolean moveLeft()
+	{
+		
+		if (Grid.getCell(xlocation, ylocation-1).getType() == Constants.OBSTACLE)
+			return false;
+		
+		PacImage.setRotate(180);
+
+		Location temp = new Location(xlocation, ylocation-1);
+		super.setCoordinate(temp);
+		
+		if (Grid.getCell(xlocation, ylocation).getType() == Constants.FOOD)
+		{
+			Pacman.score++;
+			Grid.getCell(xlocation, ylocation).setType(Constants.EMPTY);
+		}   	
+		
+		MapGenerator.redrawMap();
+
+    	return true;
+	}
+	
+
+	public boolean moveRight()
+	{
+		
+		if (Grid.getCell(xlocation, ylocation+1).getType() == Constants.OBSTACLE)
+			return false;
+		
+		PacImage.setRotate(0);
+		
+		Location temp = new Location(xlocation, ylocation-1);
+		super.setCoordinate(temp);
+		
+		if (Grid.getCell(xlocation, ylocation).getType() == Constants.FOOD)
+		{
+			Pacman.score++;
+			Grid.getCell(xlocation, ylocation).setType(Constants.EMPTY);
+		} 
+		
+		MapGenerator.redrawMap();
+
+    	return true;
+	}
+	
+	public Node getNode()
+	{
+		double xpixel = getCoordinate().getPixelW(); //x location in pixels. (x * cell_width)
+		double ypixel= getCoordinate().getPixelH();
+		
+		double min = Constants.cellHeight;
+		if (Constants.cellWidth > Constants.cellHeight)
+			min = Constants.cellWidth;
+		
+		PacImage.setFitWidth(min);
+		PacImage.setFitHeight(min);
+
+		PacImage.setX(xpixel);//+position.width/2 - min/2);
+		PacImage.setY(ypixel);//+position.height/2 - min/2);
+		
+		node = PacImage;
+		
+	return node;
+	
+}
+
+
+	
 
 }
