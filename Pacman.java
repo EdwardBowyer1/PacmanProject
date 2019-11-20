@@ -29,7 +29,7 @@ public class Pacman extends Character {
 		if (Grid.getCell(xlocation-1, ylocation).getType() == Constants.OBSTACLE)
 			return false;
 		
-		//Constants.PACMAN_IMAGE.setRotate(90+180);
+		//Constants.PACMAN_IMAGE.setRotate();
 		PacImage.setRotate(-90);
 		
 		//Changes location of Pacman (moves him up by one)
@@ -41,7 +41,7 @@ public class Pacman extends Character {
 			Pacman.score++; //Increase the score
 			Grid.getCell(xlocation, ylocation).setType(Constants.EMPTY);
 		}    	
-		MapGenerator.redrawMap();
+		Map.redrawMap();
     	
     	return true;
 	
@@ -63,7 +63,7 @@ public class Pacman extends Character {
 			Pacman.score++;
 			Grid.getCell(xlocation, ylocation).setType(Constants.EMPTY);
 		}
-    	MapGenerator.redrawMap();
+    	Map.redrawMap();
     	
     	return true;
 
@@ -86,7 +86,7 @@ public class Pacman extends Character {
 			Grid.getCell(xlocation, ylocation).setType(Constants.EMPTY);
 		}   	
 		
-		MapGenerator.redrawMap();
+		Map.redrawMap();
 
     	return true;
 	}
@@ -100,7 +100,7 @@ public class Pacman extends Character {
 		
 		PacImage.setRotate(0);
 		
-		Location temp = new Location(xlocation, ylocation-1);
+		Location temp = new Location(xlocation, ylocation+1);
 		super.setCoordinate(temp);
 		
 		if (Grid.getCell(xlocation, ylocation).getType() == Constants.FOOD)
@@ -109,7 +109,7 @@ public class Pacman extends Character {
 			Grid.getCell(xlocation, ylocation).setType(Constants.EMPTY);
 		} 
 		
-		MapGenerator.redrawMap();
+		Map.redrawMap();
 
     	return true;
 	}

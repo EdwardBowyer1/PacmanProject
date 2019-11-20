@@ -1,6 +1,8 @@
 
 
 
+import java.util.ArrayList;
+
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.scene.Scene;
@@ -14,38 +16,38 @@ public class Map {
 	
 	//Instance variables-------------------------------------------
 	protected static Pane root;
-	private static Grid grid;
+	public static Grid grid;
 	static Timeline timeLine;
 	static Scene scene;
 	static Stage stage;
 	static ImageView iView = new ImageView(Constants.GIFPacRight);
 	
-	private Pacman player;
+	
 	private int height;
 	private int width;
-	private Location startLocation;
+	private static Location startLocation = new Location(1,1);
+	public static Pacman player = new Pacman(startLocation);
+	public static ArrayList<Location> obstacles = new ArrayList<>();
 
 	//Constructors-------------------------------------------------
 	public Map()
 	{
 //		setHeight(grid.length); //consider making a wrapper class for length;
 //		setWidth(grid[0].length);
-		startLocation = new Location((width-1)/2, (height-1)/2);
-		player = new Pacman(startLocation);
 	}
 	//Methods------------------------------------------------------
 	
-	public static void movePac(double x, double y)
-	{
-		double OGX = iView.getX();
-		double OGY = iView.getY();
-		if((OGX + x)>=0 && (OGY + y)>=0 && (OGY + y)<=Constants.screenHeight && (OGX + 2*x)<=Constants.screenWidth)
-		{
-			iView.setX(OGX + x);
-			iView.setY(OGY + y);
-		}
-		root.getChildren().add(iView);
-	}
+//	public static void movePac(double x, double y)
+//	{
+//		double OGX = iView.getX();
+//		double OGY = iView.getY();
+//		if((OGX + x)>=0 && (OGY + y)>=0 && (OGY + y)<=Constants.screenHeight && (OGX + 2*x)<=Constants.screenWidth)
+//		{
+//			iView.setX(OGX + x);
+//			iView.setY(OGY + y);
+//		}
+//		root.getChildren().add(iView);
+//	}
 
 	public static Stage generateMap (Stage primaryStage){ //start here--------------------------------------------------------------------
 		stage = primaryStage;
@@ -58,27 +60,46 @@ public class Map {
 		double ScreenH = Constants.screenHeight;
 		FxGame myapp = new FxGame();
 		
+		initializeObstacles();
 		
 		stage.setTitle("Pacman Demo2");
 		
+		grid = new Grid();
 	
-		
-	
+		 
+        for (int i =0;i< Constants.gridWidth;i++){
+        	
+            for (int j =0;j< Constants.gridHeight;j++){
+            	
+            	Location cellLocation = new Location(i,j);
+            	//Random random = new Random();
+            	int type = Constants.OBSTACLE;
+            	
+            	//Check if not boundary
+            	if ( i != Constants.gridWidth-1 && j != Constants.gridHeight-1 && i != 0 && j!= 0){
+            		if (i == 1 && j ==1)
+            			type = Constants.EMPTY;
+            		
+            		else if (isObstacle(cellLocation))
+            			type = Constants.OBSTACLE;
+            		
+            		else
+            			type = Constants.FOOD;
+            	}
 
-		
-		//setting dimensions of pacman GIF
-		iView.setFitHeight(Constants.cellHeight); 
-	    iView.setFitWidth(Constants.cellWidth); 
-	    
-	    //Placing pacman in centre of screen
-		iView.setX((ScreenW-Constants.cellWidth)/2);
-		iView.setY((ScreenH-Constants.cellHeight)/2);
+            		//type = random.nextInt(2 - 0 + 1) + 0;
+            	Cell cell = new Cell(cellLocation,type);
+            	grid.addCell(cell);
+            	
+            	
+                root.getChildren().add(cell.getNode());
+            }
+        	
+        }
 
 		
 		
 		 //iView.setPreserveRatio(true);  
-		 
-		root.getChildren().add(iView);
 		
 		Scene scene = new Scene(root,ScreenW,ScreenH);
 	    stage.setScene(scene);
@@ -91,6 +112,80 @@ public class Map {
 		
 	}
 	
+	
+	public static void initializeObstacles()
+	{
+		obstacles.add(new Location(2, 2));
+		obstacles.add(new Location(2, 3));
+		obstacles.add(new Location(2, 4));
+		obstacles.add(new Location(2, 6));
+		obstacles.add(new Location(2, 7));
+		obstacles.add(new Location(2, 8));
+		obstacles.add(new Location(2, 12));
+		obstacles.add(new Location(2, 13));
+		
+		obstacles.add(new Location(13, 2));
+		obstacles.add(new Location(13, 3));
+		obstacles.add(new Location(13, 4));
+		obstacles.add(new Location(13, 6));
+		obstacles.add(new Location(13, 7));
+		obstacles.add(new Location(13, 8));
+		obstacles.add(new Location(13, 12));
+		obstacles.add(new Location(13, 13));
+		
+		obstacles.add(new Location(20, 2));
+		obstacles.add(new Location(20, 3));
+		obstacles.add(new Location(20, 4));
+		obstacles.add(new Location(20, 6));
+		obstacles.add(new Location(20, 7));
+		obstacles.add(new Location(20, 8));
+		obstacles.add(new Location(20, 12));
+		obstacles.add(new Location(20, 13));
+		
+		
+	}
+	public static boolean isObstacle(Location pObstacle)
+	{
+		for(int i = 0; i<obstacles.size(); i++)
+		{
+			if(pObstacle.getXlocation() == obstacles.get(i).getXlocation() 
+					&& pObstacle.getYlocation() == obstacles.get(i).getYlocation() )
+				return true;
+		}
+			return false;
+	}
+	
+	public static  void redrawMap()
+	{
+
+		
+		
+		Location.initScreenDimensions();
+
+		
+		root.getChildren().clear();
+		
+		for (int i = 0;i < Constants.gridHeight;i++)
+			for (int j = 0;j < Constants.gridWidth;j++)
+                root.getChildren().add(grid.getCell(i, j).getNode());
+	
+				
+			root.getChildren().add(player.getNode());
+		
+		//	root.getChildren().add(ghost1.getNode());
+		
+			
+//			Position scorePosition = new Position(1, Constants.COLUMN_CELL_COUNT-2);
+//			Text text = new Text(scorePosition.x-30,scorePosition.y-10,"SCORE : "+Pacman.Score);
+//			text.setFill(Constants.PACMAN_COLOR);
+//			text.setFont(Font.font("IMPACT", Constants.screenWidth/35));
+//			
+//			root.getChildren().add(text);
+//		
+			
+			root.requestFocus();
+	}
+	
 	public static void arrowKeyListener()
 	{
 		root.setOnKeyPressed(event -> {
@@ -98,23 +193,27 @@ public class Map {
 		
 		if (event.getCode() == KeyCode.UP)
 		{
-			iView.setRotate(-90);
-			movePac(0, -Constants.cellHeight);    			
+			//iView.setRotate(-90);
+			player.moveUp();
+			redrawMap();
 		}
 		else if (event.getCode() == KeyCode.DOWN)
 		{
-			iView.setRotate(90);
-			movePac(0, Constants.cellHeight);
+			//iView.setRotate(90);
+			player.moveDown();
+			redrawMap();
 		}
 		else if (event.getCode() == KeyCode.LEFT)
 		{	
-			iView.setRotate(180);
-			movePac(-Constants.cellWidth, 0);
+			//iView.setRotate(180);
+			player.moveLeft();
+			redrawMap();
 		}
 		else if (event.getCode() == KeyCode.RIGHT)
 		{
-			iView.setRotate(0);
-			movePac(Constants.cellWidth,0);
+			//iView.setRotate(0);
+			player.moveRight();
+			redrawMap();
 		}
 		  event.consume();
 	});
@@ -129,72 +228,7 @@ public static void startTimeline(){
     	timeLine.play();
     	
     }
-	//Map m1 = new Map();
-	// Argument is the input from console 
-	
-	// Returns true if the space in front of the character is empty (not a 1 on the grid).
-	
-//		public boolean canMoveCharacter(char directionInput) 
-//		{
-//			int PacX = player.getCoordinate().getXlocation() ;
-//			int PacY = player.getCoordinate().getYlocation();
-//			if(directionInput == 'w')
-//			{
-//				System.out.println("Next grid element: " +grid[PacX][PacY-1]); //meant to debug the issue of 
-//																			   //not being able to access block before wall(width). 
-//				if(grid[PacX][PacY-1] != 1)
-//				{
-//					return true;
-//				}
-//			}
-//			else if(directionInput == 's')
-//			{
-//				System.out.println("Next grid element: " +grid[PacX][PacY+1]);
-//				if(grid[PacX][PacY+2] != 1)
-//				{
-//					return true;
-//				}
-//			}
-//			else if(directionInput == 'a')
-//			{
-//				System.out.println("Next grid element: " +grid[PacX-1][PacY]);
-//				if(grid[PacX-1][PacY] != 1)
-//				{
-//					return true;
-//				}
-//			}
-//		
-//			else if(directionInput == 'd')
-//			{
-//				System.out.println("Next grid element: " +grid[PacX+1][PacY]);
-//				if(grid[PacX+1][PacY] != 1)
-//				{
-//					return true;
-//				}
-//			}
-//				return false;
-//		}
-//		
-//		public void printMap()
-//		{
-//			//need the character coordintes of pacman, setting local variable
-//			int PacX = player.getCoordinate().getXlocation();
-//			int PacY = player.getCoordinate().getYlocation();
-//			 //these loops print out the grid to whatever we want to graphically output
-//			for(int i = 0; i< height; i++)
-//			{
-//				for(int j = 0; j< width; j++)
-//				{
-//					if (j == PacX && i == PacY) //must check this first
-//						System.out.print('C');
-//					else if(grid[i][j] == 0)
-//						System.out.print(' ');
-//					else if(grid[i][j] == 1)
-//						System.out.print('#');
-//				}
-//				System.out.println();
-//			}
-//		}
+
 			
 	//-----Getters-------------------------------	
 		public int getHeight() 

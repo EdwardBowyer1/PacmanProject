@@ -17,6 +17,8 @@ import javafx.stage.Stage;
 import javafx.geometry.Rectangle2D;
 import javafx.stage.Screen;
 
+
+
 public class FxGame extends Application{
 	
 	public static void main(String[] args) {
@@ -30,10 +32,14 @@ public class FxGame extends Application{
 		
 	
         Location.initScreenDimensions();
+        
+//        Map map = new Map();
        
         Map.generateMap(primaryStage).show();
         
         Map.arrowKeyListener();
+        
+        Map.redrawMap();
 		
 		Map.startTimeline();
 //		BackgroundFill myBF = new BackgroundFill(Color.BLACK, new CornerRadii(1),
