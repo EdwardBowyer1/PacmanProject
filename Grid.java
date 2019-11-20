@@ -11,7 +11,7 @@ public class Grid {
 	
 	public void addCell(Cell cell){ //we need to make copies of the cell because encapsulation
 		
-		grid [cell.getCoordinate().getYlocation()][cell.getCoordinate().getXlocation()] = cell;
+		grid [cell.getCoordinate().getXlocation()][cell.getCoordinate().getYlocation()] = cell;
 		
 	}
 	

@@ -31,6 +31,7 @@ public class FxGame extends Application{
 	public void start(Stage primaryStage) throws Exception {
 		
 	
+        
         Location.initScreenDimensions();
         
 //        Map map = new Map();

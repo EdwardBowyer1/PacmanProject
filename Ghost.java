@@ -80,6 +80,7 @@ public class Ghost extends Character {
 
 	    if (ghostYlocation == pacYlocation && ghostXlocation == pacXlocation ){
 	    	//Map.gameEnded();
+	    	Map.redrawMap();
 		}else{
     		Map.redrawMap();
 		}
@@ -89,7 +90,7 @@ public class Ghost extends Character {
 
 	public  boolean moveUp(){
 
-		if (Grid.getCell(ghostYlocation-1, ghostXlocation).getType() == Constants.OBSTACLE)
+		if (Map.grid.getCell(ghostYlocation-1, ghostXlocation).getType() == Constants.OBSTACLE)
 			return false;
 
 		Location temp = new Location(ghostYlocation-1, ghostXlocation);
@@ -102,7 +103,7 @@ public class Ghost extends Character {
 
 	public  boolean moveDown(){
 
-		if (Grid.getCell(ghostYlocation+1, ghostXlocation).getType() == Constants.OBSTACLE)
+		if (Map.grid.getCell(ghostYlocation+1, ghostXlocation).getType() == Constants.OBSTACLE)
 			return false;
 
 		Location temp = new Location(ghostYlocation+1, ghostXlocation);
@@ -115,7 +116,7 @@ public class Ghost extends Character {
 
 	public  boolean moveLeft(){
 
-		if (Grid.getCell(ghostYlocation,ghostXlocation-1).getType() == Constants.OBSTACLE)
+		if (Map.grid.getCell(ghostYlocation,ghostXlocation-1).getType() == Constants.OBSTACLE)
 			return false;
 
 		Location temp = new Location(ghostYlocation, ghostXlocation-1);
@@ -129,7 +130,7 @@ public class Ghost extends Character {
 
 	public  boolean moveRight(){
 
-		if (Grid.getCell(ghostYlocation, ghostXlocation+1).getType() == Constants.OBSTACLE)
+		if (Map.grid.getCell(ghostYlocation, ghostXlocation+1).getType() == Constants.OBSTACLE)
 			return false;
 
 		Location temp = new Location(ghostYlocation, ghostXlocation+1);

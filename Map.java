@@ -1,6 +1,8 @@
 
 
 
+import java.awt.Color;
+import java.awt.Font;
 import java.util.ArrayList;
 
 import javafx.animation.KeyFrame;
@@ -9,6 +11,9 @@ import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Paint;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -20,34 +25,23 @@ public class Map {
 	static Timeline timeLine;
 	static Scene scene;
 	static Stage stage;
-	static ImageView iView = new ImageView(Constants.GIFPacRight);
+	//static ImageView iView = new ImageView(Constants.GIFPacRight);
+	//intital starting point of pacman, matrix notation
+	static int initIM = 1;
+	static int initJM = 5;
 	
-	
-	private int height;
-	private int width;
-	private static Location startLocation = new Location(1,1);
+	private static Location startLocation = new Location(initIM, initJM);
+	private static Location ghostStartLocation = new Location(1,5);
+
 	public static Pacman player = new Pacman(startLocation);
+	public static Ghost redGhost = new Ghost (ghostStartLocation);
 	public static ArrayList<Location> obstacles = new ArrayList<>();
 
 	//Constructors-------------------------------------------------
 	public Map()
 	{
-//		setHeight(grid.length); //consider making a wrapper class for length;
-//		setWidth(grid[0].length);
+		
 	}
-	//Methods------------------------------------------------------
-	
-//	public static void movePac(double x, double y)
-//	{
-//		double OGX = iView.getX();
-//		double OGY = iView.getY();
-//		if((OGX + x)>=0 && (OGY + y)>=0 && (OGY + y)<=Constants.screenHeight && (OGX + 2*x)<=Constants.screenWidth)
-//		{
-//			iView.setX(OGX + x);
-//			iView.setY(OGY + y);
-//		}
-//		root.getChildren().add(iView);
-//	}
 
 	public static Stage generateMap (Stage primaryStage){ //start here--------------------------------------------------------------------
 		stage = primaryStage;
@@ -58,7 +52,6 @@ public class Map {
 
 		double ScreenW = Constants.screenWidth;
 		double ScreenH = Constants.screenHeight;
-		FxGame myapp = new FxGame();
 		
 		initializeObstacles();
 		
@@ -67,20 +60,20 @@ public class Map {
 		grid = new Grid();
 	
 		 
-        for (int i =0;i< Constants.gridWidth;i++){
+        for (int i =0;i< Constants.gridHeight-1;i++){
         	
-            for (int j =0;j< Constants.gridHeight;j++){
+            for (int j =0;j< Constants.gridWidth-1;j++){
             	
             	Location cellLocation = new Location(i,j);
             	//Random random = new Random();
             	int type = Constants.OBSTACLE;
             	
             	//Check if not boundary
-            	if ( i != Constants.gridWidth-1 && j != Constants.gridHeight-1 && i != 0 && j!= 0){
-            		if (i == 1 && j ==1)
+            	if ( j != Constants.gridWidth-1 && i != Constants.gridHeight-1 && i != 0 && j!= 0){
+            		if (i == initIM && j ==initIM)
             			type = Constants.EMPTY;
             		
-            		else if (isObstacle(cellLocation))
+            		 if (isObstacle(cellLocation))
             			type = Constants.OBSTACLE;
             		
             		else
@@ -115,32 +108,32 @@ public class Map {
 	
 	public static void initializeObstacles()
 	{
-		obstacles.add(new Location(2, 2));
-		obstacles.add(new Location(2, 3));
-		obstacles.add(new Location(2, 4));
-		obstacles.add(new Location(2, 6));
 		obstacles.add(new Location(2, 7));
 		obstacles.add(new Location(2, 8));
-		obstacles.add(new Location(2, 12));
 		obstacles.add(new Location(2, 13));
+		obstacles.add(new Location(2, 14));
+		obstacles.add(new Location(2, 15));
+		obstacles.add(new Location(2, 21));
+		obstacles.add(new Location(2, 22));
+		obstacles.add(new Location(2, 23));
 		
-		obstacles.add(new Location(13, 2));
-		obstacles.add(new Location(13, 3));
-		obstacles.add(new Location(13, 4));
-		obstacles.add(new Location(13, 6));
+		obstacles.add(new Location(8, 7));
+		obstacles.add(new Location(8, 8));
+		obstacles.add(new Location(8, 13));
+		obstacles.add(new Location(8, 14));
+		obstacles.add(new Location(8, 15));
+		obstacles.add(new Location(8, 21));
+		obstacles.add(new Location(8, 22));
+		obstacles.add(new Location(8, 23));
+		
 		obstacles.add(new Location(13, 7));
 		obstacles.add(new Location(13, 8));
-		obstacles.add(new Location(13, 12));
 		obstacles.add(new Location(13, 13));
-		
-		obstacles.add(new Location(20, 2));
-		obstacles.add(new Location(20, 3));
-		obstacles.add(new Location(20, 4));
-		obstacles.add(new Location(20, 6));
-		obstacles.add(new Location(20, 7));
-		obstacles.add(new Location(20, 8));
-		obstacles.add(new Location(20, 12));
-		obstacles.add(new Location(20, 13));
+		obstacles.add(new Location(13, 14));
+		obstacles.add(new Location(13, 15));
+		obstacles.add(new Location(13, 21));
+		obstacles.add(new Location(13, 22));
+		obstacles.add(new Location(13, 23));
 		
 		
 	}
@@ -148,8 +141,7 @@ public class Map {
 	{
 		for(int i = 0; i<obstacles.size(); i++)
 		{
-			if(pObstacle.getXlocation() == obstacles.get(i).getXlocation() 
-					&& pObstacle.getYlocation() == obstacles.get(i).getYlocation() )
+			if(pObstacle.isEqual(obstacles.get(i)))
 				return true;
 		}
 			return false;
@@ -165,23 +157,32 @@ public class Map {
 		
 		root.getChildren().clear();
 		
-		for (int i = 0;i < Constants.gridHeight;i++)
-			for (int j = 0;j < Constants.gridWidth;j++)
+		for (int i = 0;i < Constants.gridHeight-1;i++)
+		{
+			for (int j = 0;j < Constants.gridWidth-1;j++)
+			{
                 root.getChildren().add(grid.getCell(i, j).getNode());
-	
+               // System.out.print(grid.getCell(i, j).toString()); //debugging
+			}
+			//System.out.println(); //debugging
+		}
 				
 			root.getChildren().add(player.getNode());
 		
-		//	root.getChildren().add(ghost1.getNode());
+			root.getChildren().add(redGhost.getNode());
 		
 			
-//			Position scorePosition = new Position(1, Constants.COLUMN_CELL_COUNT-2);
-//			Text text = new Text(scorePosition.x-30,scorePosition.y-10,"SCORE : "+Pacman.Score);
-//			text.setFill(Constants.PACMAN_COLOR);
-//			text.setFont(Font.font("IMPACT", Constants.screenWidth/35));
-//			
-//			root.getChildren().add(text);
-//		
+			Location scorePosition = new Location(1, (int)Constants.screenWidth);
+			 Text text = new Text(scorePosition.getPixelH()-30,scorePosition.getPixelW()-10,"Score : "+player);
+			 
+//			Paint value = Color.blue;
+//			Paint Font = 
+//			text.setFill(value);
+//			text.setFont(value);
+			
+			
+			root.getChildren().add(text);
+		
 			
 			root.requestFocus();
 	}
@@ -189,39 +190,37 @@ public class Map {
 	public static void arrowKeyListener()
 	{
 		root.setOnKeyPressed(event -> {
-			root.getChildren().clear();
 		
 		if (event.getCode() == KeyCode.UP)
 		{
-			//iView.setRotate(-90);
 			player.moveUp();
 			redrawMap();
 		}
 		else if (event.getCode() == KeyCode.DOWN)
 		{
-			//iView.setRotate(90);
 			player.moveDown();
 			redrawMap();
 		}
 		else if (event.getCode() == KeyCode.LEFT)
 		{	
-			//iView.setRotate(180);
 			player.moveLeft();
 			redrawMap();
 		}
 		else if (event.getCode() == KeyCode.RIGHT)
 		{
-			//iView.setRotate(0);
 			player.moveRight();
 			redrawMap();
 		}
-		  event.consume();
+		  //event.consume();
+		redrawMap();
 	});
-		iView.setFocusTraversable(true);
+		//iView.setFocusTraversable(true);
 	}
 public static void startTimeline(){
     	
-    	timeLine = new Timeline(new KeyFrame(Duration.millis(250), event -> {
+	//here we control the rate at which the ghost moves in miliseconds
+    	timeLine = new Timeline(new KeyFrame(Duration.millis(3000), event -> {
+    		redGhost.moveGhost();
         	
     			}));
     	timeLine.setCycleCount(Timeline.INDEFINITE);
@@ -231,15 +230,6 @@ public static void startTimeline(){
 
 			
 	//-----Getters-------------------------------	
-		public int getHeight() 
-		{
-			return height;
-		}
-			
-		public int getWidth() 
-		{
-			return width;
-		}
 		
 		public Pacman getPlayer() 
 		{
@@ -249,14 +239,6 @@ public static void startTimeline(){
 			
 			
 	//-----Setters-------------------------------
-		private void setHeight(int h)
-		{
-			height = h;
-		}
-		private void setWidth(int w)
-		{
-			width = w;
-		}
 
 
 }

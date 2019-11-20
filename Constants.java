@@ -10,8 +10,8 @@ public class Constants
 		public static int gridHeight = 15; //number of rows of the grid
 		
 		//number of pixels of the screen horizontally/vertically from origin
-		public static double screenWidth= 1280.0;//grid_width*cellWidth;
-		public static double screenHeight= 680; //grid_height*cellHeight;
+		public  static double screenWidth = 1920.0;//grid_width*cellWidth;
+		public  static double screenHeight = 1040.0 ; //grid_height*cellHeight;
 		
 		//number of pixels of each the width/height of each individual cell 
 		public static double cellWidth = screenWidth/gridWidth;
@@ -24,7 +24,7 @@ public class Constants
 		//public static int ENEMY = 3;
 //		
 //		public static Color BORDR_COLOR = Color.BLUE;
-//		public static Color OBSTACLE_COLOR = 	Color.YELLOW;
+		public static Color OBSTACLE_COLOR = 	Color.YELLOW;
 		public static Color EMPTY_COLOUR = 	Color.BLACK;
 		public static Color FOOD_COLOUR = 	Color.WHITE; 
 //		public static Color PACMAN_COLOR = 	Color.YELLOW;
@@ -37,7 +37,7 @@ public class Constants
 		public static Image GIFPacRight = new Image("pacmanRight.gif"); 
 		public static Image GIFPacLeft = new Image("pacmanLeft.gif"); 
 		public static Image GIFPacDown = new Image("pacmanRight.gif");
-		public static ImageView GHOST_IMAGE;
+//		public static ImageView GHOST_IMAGE;
 		public static Image Wall = new Image("wall.png");
 
 	
