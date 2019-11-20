@@ -6,7 +6,7 @@ import javafx.scene.shape.Circle;
 
 public class Ghost extends Character {
 
-	//Location location;
+	
 	private int pacXlocation  = Map.player.getCoordinate().getXlocation(); //X and Y locations
 	private int pacYlocation  = Map.player.getCoordinate().getYlocation();
 
@@ -15,7 +15,8 @@ public class Ghost extends Character {
 
 	private Node node;
 	public static ImageView redGhostImage = new ImageView(Constants.GIFRedGhost);
-
+	
+	// constructor
 
 	public Ghost(Location toCopy) {
 		super(toCopy);
