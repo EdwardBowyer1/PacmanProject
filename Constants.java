@@ -32,7 +32,7 @@ public class Constants
 		//public static Color GAMEOVER_RECTANGLE_COLOR = 	Color.DARKGRAY;
 		//public static Color GAMEOVER_RECTANGLE_STROKE_COLOR = 	Color.RED;
 
-
+		public static Image GIFRedGhost = new Image("redGhost.gif");
 		public static Image GIFPacUp = new Image("pacmanUp.gif");
 		public static Image GIFPacRight = new Image("pacmanRight.gif"); 
 		public static Image GIFPacLeft = new Image("pacmanLeft.gif"); 
