@@ -21,5 +21,13 @@ public class Grid {
 		
 	}
 	
+	public void toConsole() //for debugging
+	{
+		for(int i = 0; i< grid.length-1; i++)
+			for(int j= 0; j<grid[0].length-1; j++)
+				System.out.print(grid[i][j].getType());
+		System.out.println();
+	}
+	
 
 }

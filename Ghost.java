@@ -9,9 +9,9 @@ public class Ghost extends Character {
 	
 	private int pacXlocation  = Map.player.getCoordinate().getXlocation(); //X and Y locations
 	private int pacYlocation  = Map.player.getCoordinate().getYlocation();
-
-	private int ghostXlocation = getCoordinate().getXlocation();
-	private int ghostYlocation = getCoordinate().getYlocation();
+//
+//	private int ghostXlocation = getCoordinate().getXlocation();
+//	private int ghostYlocation = getCoordinate().getYlocation();
 
 	private Node node;
 	public static ImageView redGhostImage = new ImageView(Constants.GIFRedGhost);
@@ -25,6 +25,9 @@ public class Ghost extends Character {
 
 	public void moveGhost(){
 
+
+		int ghostXlocation = getCoordinate().getXlocation();
+		int ghostYlocation = getCoordinate().getYlocation();
 		Random rand = new Random();
 	    int randomNum = rand.nextInt((3 - 0) + 1) + 0;
 
@@ -90,6 +93,8 @@ public class Ghost extends Character {
 
 	public  boolean moveUp(){
 
+		int ghostXlocation = getCoordinate().getXlocation();
+		int ghostYlocation = getCoordinate().getYlocation();
 		if (Map.grid.getCell(ghostYlocation-1, ghostXlocation).getType() == Constants.OBSTACLE)
 			return false;
 
@@ -103,6 +108,8 @@ public class Ghost extends Character {
 
 	public  boolean moveDown(){
 
+		int ghostXlocation = getCoordinate().getXlocation();
+		int ghostYlocation = getCoordinate().getYlocation();
 		if (Map.grid.getCell(ghostYlocation+1, ghostXlocation).getType() == Constants.OBSTACLE)
 			return false;
 
@@ -116,6 +123,9 @@ public class Ghost extends Character {
 
 	public  boolean moveLeft(){
 
+
+		int ghostXlocation = getCoordinate().getXlocation();
+		int ghostYlocation = getCoordinate().getYlocation();
 		if (Map.grid.getCell(ghostYlocation,ghostXlocation-1).getType() == Constants.OBSTACLE)
 			return false;
 
@@ -129,6 +139,9 @@ public class Ghost extends Character {
 	}
 
 	public  boolean moveRight(){
+
+		int ghostXlocation = getCoordinate().getXlocation();
+		int ghostYlocation = getCoordinate().getYlocation();
 
 		if (Map.grid.getCell(ghostYlocation, ghostXlocation+1).getType() == Constants.OBSTACLE)
 			return false;

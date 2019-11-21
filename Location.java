@@ -10,6 +10,8 @@ public class Location {
 	
 	private double pixelW; //why do we need this? Cant we just refer to constant class ANS-> Because its the how many pixels from (0,0) to this location, its a multiple of cell pixels dimensions 
 	private double pixelH;
+	
+	public static int tracker = 0;
 
 
 	
@@ -39,8 +41,11 @@ public class Location {
         Constants.screenWidth = primaryScreenBounds.getWidth();
         Constants.screenHeight = primaryScreenBounds.getHeight();
         
-        
+        //limiting the printouts to console
+        if(tracker==0)
          System.out.println("width: " +Constants.screenWidth + " height: " + Constants.screenHeight + " \n" + primaryScreenBounds.toString());
+        
+        tracker++;
 	}
 	
 	

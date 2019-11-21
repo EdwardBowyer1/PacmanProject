@@ -40,7 +40,7 @@ public class FxGame extends Application{
         
         Map.arrowKeyListener();
         
-        Map.redrawMap();
+        Map.redrawMap(); 
 		
 		Map.startTimeline();
 //		BackgroundFill myBF = new BackgroundFill(Color.BLACK, new CornerRadii(1),

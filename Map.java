@@ -27,8 +27,8 @@ public class Map {
 	static Stage stage;
 	//static ImageView iView = new ImageView(Constants.GIFPacRight);
 	//intital starting point of pacman, matrix notation
-	static int initIM = 1;
-	static int initJM = 5;
+	static int initIM = 12;
+	static int initJM = 7;
 	
 	private static Location startLocation = new Location(initIM, initJM);
 	private static Location ghostStartLocation = new Location(1,5);
@@ -43,7 +43,7 @@ public class Map {
 		
 	}
 
-	public static Stage generateMap (Stage primaryStage){ //start here--------------------------------------------------------------------
+	public static Stage generateMap (Stage primaryStage){ 
 		stage = primaryStage;
 		//loading pacman GIF from constants to imageView class
 	
@@ -57,40 +57,41 @@ public class Map {
 		
 		stage.setTitle("Pacman Demo2");
 		
+		
+		// HERE IS WHERE THE INITIAL GRID POPULATING OCCURS--------------------------------------------------------------------------------
 		grid = new Grid();
 	
-		 
         for (int i =0;i< Constants.gridHeight-1;i++){
         	
             for (int j =0;j< Constants.gridWidth-1;j++){
             	
             	Location cellLocation = new Location(i,j);
-            	//Random random = new Random();
-            	int type = Constants.OBSTACLE;
+            	
             	
             	//Check if not boundary
-            	if ( j != Constants.gridWidth-1 && i != Constants.gridHeight-1 && i != 0 && j!= 0){
-            		if (i == initIM && j ==initIM)
+            	int type = Constants.OBSTACLE;
+            	if ( j != Constants.gridWidth-2 && i != Constants.gridHeight-2 && i != 0 && j!= 0){
+            		if (j == player.getCoordinate().getYlocation() && i ==player.getCoordinate().getXlocation())
             			type = Constants.EMPTY;
             		
-            		 if (isObstacle(cellLocation))
+            		else if (isObstacle(cellLocation))
             			type = Constants.OBSTACLE;
             		
             		else
             			type = Constants.FOOD;
+            		
+            		
             	}
+            	//System.out.print(type);
 
-            		//type = random.nextInt(2 - 0 + 1) + 0;
             	Cell cell = new Cell(cellLocation,type);
             	grid.addCell(cell);
             	
             	
                 root.getChildren().add(cell.getNode());
             }
-        	
+        	//System.out.println(); DEBUGGING
         }
-
-		
 		
 		 //iView.setPreserveRatio(true);  
 		
@@ -162,9 +163,9 @@ public class Map {
 			for (int j = 0;j < Constants.gridWidth-1;j++)
 			{
                 root.getChildren().add(grid.getCell(i, j).getNode());
-               // System.out.print(grid.getCell(i, j).toString()); //debugging
+               // System.out.print(grid.getCell(i, j).toString()); //debugging----------------------------------------------------
 			}
-			//System.out.println(); //debugging
+			//System.out.println(); //debugging-----------------------------------------------------------------------------------
 		}
 				
 			root.getChildren().add(player.getNode());
@@ -219,7 +220,7 @@ public class Map {
 public static void startTimeline(){
     	
 	//here we control the rate at which the ghost moves in miliseconds
-    	timeLine = new Timeline(new KeyFrame(Duration.millis(3000), event -> {
+    	timeLine = new Timeline(new KeyFrame(Duration.millis(1000), event -> {
     		redGhost.moveGhost();
         	
     			}));

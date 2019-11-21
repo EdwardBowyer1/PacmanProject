@@ -2,9 +2,9 @@ import javafx.scene.Node;
 import javafx.scene.image.ImageView;
 
 public class Pacman extends Character {
-
-	private int xlocation  = getCoordinate().getXlocation(); //X and Y locations 
-	private int ylocation  = getCoordinate().getYlocation();
+//	private int xlocation  = getCoordinate().getXlocation(); //X and Y locations 
+//	private int ylocation  = getCoordinate().getYlocation();
+	
 	
 	private static int score;
 	private static Node node;
@@ -25,6 +25,8 @@ public class Pacman extends Character {
 	
 	public boolean moveUp()
 	{
+		 int xlocation  = getCoordinate().getXlocation(); //X and Y locations 
+		int ylocation  = getCoordinate().getYlocation();
 		//Checks one block above Pacman before moving
 		if (Map.grid.getCell(xlocation-1, ylocation).getType() == Constants.OBSTACLE)
 			return false;
@@ -49,6 +51,8 @@ public class Pacman extends Character {
 	
 	public boolean moveDown()
 	{
+		 int xlocation  = getCoordinate().getXlocation(); //X and Y locations 
+			int ylocation  = getCoordinate().getYlocation();
 		//Checks if location below Pacman is an OBSTACLE
 		if (Map.grid.getCell(xlocation+1, ylocation).getType() == Constants.OBSTACLE)
 			return false;
@@ -72,6 +76,8 @@ public class Pacman extends Character {
 	public boolean moveLeft()
 	{
 		
+		 int xlocation  = getCoordinate().getXlocation(); //X and Y locations 
+			int ylocation  = getCoordinate().getYlocation();
 		if (Map.grid.getCell(xlocation, ylocation-1).getType() == Constants.OBSTACLE)
 			return false;
 		
@@ -94,6 +100,8 @@ public class Pacman extends Character {
 
 	public boolean moveRight() 
 	{
+		 int xlocation  = getCoordinate().getXlocation(); //X and Y locations 
+			int ylocation  = getCoordinate().getYlocation();
 		
 		if (Map.grid.getCell(xlocation, ylocation+1).getType() == Constants.OBSTACLE)
 			return false;

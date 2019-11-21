@@ -67,8 +67,8 @@ public class Cell extends GameObject
 			
 			((Circle)node).setFill(Constants.FOOD_COLOUR);  	//Color of dot/food is white
 			
-			((Circle) node).setCenterX(ylocation + Constants.cellWidth/2);
-			((Circle) node).setCenterY(xlocation +Constants.cellHeight/2 - Constants.cellWidth/8);
+			((Circle) node).setCenterX(xlocation + Constants.cellWidth/2);
+			((Circle) node).setCenterY(ylocation +Constants.cellHeight/2 );
 			((Circle) node).setRadius(Constants.cellHeight/8);	
 		}
 		else if(type == Constants.EMPTY) 
