@@ -1,5 +1,7 @@
+/**JAVADOC: Constants for the Text based version of Pac Man */
 public class TextConstant
 {
+	//Constant variables-------------------------------------------
 		public static int EMPTY = 0;
 		public static int OBSTACLE = 1;
 		public static int FOOD = 2;
