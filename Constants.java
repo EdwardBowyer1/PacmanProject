@@ -11,7 +11,7 @@ public class Constants
 		
 		//number of pixels of the screen horizontally/vertically from origin
 		public  static double screenWidth = 1000;//1920.0;//grid_width*cellWidth;
-		public  static double screenHeight = 800;//1040.0 ; //grid_height*cellHeight;
+		public  static double screenHeight = 850;//1040.0 ; //grid_height*cellHeight;
 		
 		//number of pixels of each the width/height of each individual cell 
 		public static double cellWidth = screenWidth/gridWidth;

@@ -22,10 +22,10 @@ public class Ghost extends Character {
 	public void moveGhost(){
 
 
-		 int pacXlocation  = Map.player.getCoordinate().getYlocation(); //X and Y locations
-		 int pacYlocation  = Map.player.getCoordinate().getXlocation(); //swapped the x and y location due to confusion of x,y being [i][j] notation
-		int ghostXlocation = getCoordinate().getYlocation();			// Ylocation represents width of grid "Traditional x axis"
-		int ghostYlocation = getCoordinate().getXlocation();			//Xlocation represents height of grid "traditional y axis"
+		double pacXlocation  = Map.player.getCoordinate().getYlocation(); //X and Y locations
+		double pacYlocation  = Map.player.getCoordinate().getXlocation(); //swapped the x and y location due to confusion of x,y being [i][j] notation
+		double ghostXlocation = getCoordinate().getYlocation();			// Ylocation represents width of grid "Traditional x axis"
+		double ghostYlocation = getCoordinate().getXlocation();			//Xlocation represents height of grid "traditional y axis"
 		Random rand = new Random();
 	    int randomNum = rand.nextInt((3 - 0) + 1) + 0;
 
@@ -83,7 +83,7 @@ public class Ghost extends Character {
 	    	Map.gameOver();
 	    	//Map.redrawMap();
 		}else{
-    		Map.redrawMap();
+    		//Map.redrawMap();
 		}
 
 
@@ -91,14 +91,14 @@ public class Ghost extends Character {
 
 	public  boolean moveUp(){
 
-		int ghostXlocation = getCoordinate().getYlocation();
-		int ghostYlocation = getCoordinate().getXlocation();
+		double ghostXlocation = getCoordinate().getYlocation();
+		double ghostYlocation = getCoordinate().getXlocation();
 		if (Map.grid.getCell(ghostYlocation-1, ghostXlocation).getType() == Constants.OBSTACLE)
 			return false;
 
 		Location temp = new Location(ghostYlocation-1, ghostXlocation);
 		super.setCoordinate(temp);
-		Map.redrawMap();
+		//Map.redrawMap();
 
     	return true;
 
@@ -106,14 +106,14 @@ public class Ghost extends Character {
 
 	public  boolean moveDown(){
 
-		int ghostXlocation = getCoordinate().getYlocation();
-		int ghostYlocation = getCoordinate().getXlocation();
+		double ghostXlocation = getCoordinate().getYlocation();
+		double ghostYlocation = getCoordinate().getXlocation();
 		if (Map.grid.getCell(ghostYlocation+1, ghostXlocation).getType() == Constants.OBSTACLE)
 			return false;
 
 		Location temp = new Location(ghostYlocation+1, ghostXlocation);
 		super.setCoordinate(temp);
-    	Map.redrawMap();
+    	//Map.redrawMap();
 
     	return true;
 
@@ -122,14 +122,14 @@ public class Ghost extends Character {
 	public  boolean moveLeft(){
 
 
-		int ghostXlocation = getCoordinate().getYlocation();
-		int ghostYlocation = getCoordinate().getXlocation();
+		double ghostXlocation = getCoordinate().getYlocation();
+		double ghostYlocation = getCoordinate().getXlocation();
 		if (Map.grid.getCell(ghostYlocation,ghostXlocation-1).getType() == Constants.OBSTACLE)
 			return false;
 
 		Location temp = new Location(ghostYlocation, ghostXlocation-1);
 		super.setCoordinate(temp);
-		Map.redrawMap();
+		//Map.redrawMap();
 
     	return true;
 
@@ -138,15 +138,15 @@ public class Ghost extends Character {
 
 	public  boolean moveRight(){
 
-		int ghostXlocation = getCoordinate().getYlocation();
-		int ghostYlocation = getCoordinate().getXlocation();
+		double ghostXlocation = getCoordinate().getYlocation();
+		double ghostYlocation = getCoordinate().getXlocation();
 
 		if (Map.grid.getCell(ghostYlocation, ghostXlocation+1).getType() == Constants.OBSTACLE)
 			return false;
 
 		Location temp = new Location(ghostYlocation, ghostXlocation+1);
 		super.setCoordinate(temp);
-		Map.redrawMap();
+		//Map.redrawMap();
 
     	return true;
 

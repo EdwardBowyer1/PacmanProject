@@ -25,13 +25,13 @@ public class Grid {
 	
 	public void addCell(Cell cell){ //we need to make copies of the cell because encapsulation
 		
-		grid [cell.getCoordinate().getXlocation()][cell.getCoordinate().getYlocation()] = cell;
+		grid [(int)cell.getCoordinate().getXlocation()][(int)cell.getCoordinate().getYlocation()] = cell;
 		
 	}
 	
-	public  Cell getCell(int row, int column){
+	public  Cell getCell(double row, double column){
 		
-		return grid [row][column];
+		return grid [(int)row][(int)column];
 		
 	}
 	

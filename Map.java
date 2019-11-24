@@ -18,16 +18,19 @@ import javafx.scene.text.*;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+/**
+ * @author Sami
+ *
+ */
 public class Map {
 	
 	//Instance variables-------------------------------------------
 	protected static Pane root;
 	public static Grid grid;
-	public static Grid originalGrid;
 	public static Timeline timeLine;
 	public static Scene scene;
 	public static Stage stage;
-	public static Text text;
+	public static Text score, highscore;
 	//public static Boolean noMoreFood = false;
 	public static int foodCount = 0;
 	public static int originalFoodCount;
@@ -38,7 +41,7 @@ public class Map {
 	
 	private static Location startLocation = new Location(initIM, initJM);
 	private static Location ghostStartLocation = new Location(1,5);
-	private static Location scorePosition = new Location(1,Constants.gridWidth/2-2);
+	private static Location scorePosition = new Location(0.5,0.2);
 
 	public static Pacman player = new Pacman(startLocation);
 	public static Ghost redGhost = new Ghost (ghostStartLocation);
@@ -66,53 +69,10 @@ public class Map {
 		
 		
 		// HERE IS WHERE THE INITIAL GRID POPULATING OCCURS--------------------------------------------------------------------------------
-		grid = new Grid();
-	
-        for (int i =0;i< Constants.gridHeight;i++){
-        	
-            for (int j =0;j< Constants.gridWidth;j++){
-            	
-            	Location cellLocation = new Location(i,j);
-            	
-            	
-            	//Check if not boundary
-            	int type = Constants.OBSTACLE;
-            	if ( j != Constants.gridWidth-1 && i != Constants.gridHeight-1 && i != 0 && j!= 0){
-            		if (j == player.getCoordinate().getYlocation() && i ==player.getCoordinate().getXlocation())
-            			type = Constants.EMPTY;
-            		
-            		else if (isObstacle(cellLocation))
-            			type = Constants.OBSTACLE;
-            		
-            		else {
-            			type = Constants.FOOD;
-            			foodCount++;
-            		}
-            		
-            		
-            	}
-            	System.out.print(type);
-
-            	Cell cell = new Cell(cellLocation,type);
-            	grid.addCell(cell);
-            	
-            	
-                root.getChildren().add(cell.getNode());
-            }
-        	System.out.println();
-        }
-        
-        originalFoodCount = foodCount;
-        originalGrid = new Grid(grid);
+		initGrid();
 		
-        Location scorePosition = new Location(0, Constants.gridWidth-5);
-		 //iView.setPreserveRatio(true);  
-        
-        //create function for this
-        text = new Text();
-
-		 
-		 root.getChildren().add(text);
+		
+        originalFoodCount = foodCount;
 
 		
 		Scene scene = new Scene(root,ScreenW,ScreenH);
@@ -172,15 +132,15 @@ public class Map {
 		if(foodCount==0)
 		{
 			//should be resetting the map
-			grid = new Grid(originalGrid);
+			initGrid();
 			grid.toConsole();
 			foodCount = originalFoodCount;
 		}
 //		
 //		int completeFood = 0;
-		for (int i = 0;i < Constants.gridHeight-1;i++)
+		for (int i = 0;i < Constants.gridHeight;i++)
 		{
-			for (int j = 0;j < Constants.gridWidth-1;j++)
+			for (int j = 0;j < Constants.gridWidth;j++)
 			{
                 root.getChildren().add(grid.getCell(i, j).getNode());
                 
@@ -193,21 +153,33 @@ public class Map {
 			root.getChildren().add(redGhost.getNode());
 		
 			
-			text = new Text();
-			 text.setY(scorePosition.getPixelH()-20);
-			 text.setX(scorePosition.getPixelW()+100);
-			 //System.out.print(scorePosition.getPixelW() +  "height:"+scorePosition.getPixelH() +"here" );
-			 text.setText("Score : "+player.getScore());
-			 text.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 20));
-			 text.setFill(Color.WHITE);
-
-			 text.setStroke(Color.LIGHTGOLDENRODYELLOW); 
+			score  = new Text();
+			highscore = new Text();
 			
+			String S = "Score : "+player.getScore();
+			String H = "Highscore:";
 			
-			root.getChildren().add(text);
-		
+			score = setText(score,scorePosition,S);
+			highscore = setText(highscore,new Location(0.5,10),H);
+			
+			root.getChildren().add(score);
+			root.getChildren().add(highscore);
 			
 			root.requestFocus();
+	}
+	
+	public static Text setText(Text text, Location scorePosition, String textV )
+	{
+		 text.setY(scorePosition.getPixelH());
+		 text.setX(scorePosition.getPixelW());
+		 //System.out.print(scorePosition.getPixelW() +  "height:"+scorePosition.getPixelH() +"here" );
+		 text.setText(textV);
+		 text.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 20));
+		 text.setFill(Color.WHITE);
+
+		 text.setStroke(Color.LIGHTGOLDENRODYELLOW); 
+		return text;
+		
 	}
 	
 	public static void arrowKeyListener()
@@ -253,20 +225,62 @@ public class Map {
 	
 	public static void gameOver()
 	{
+		
 		System.exit(1);
 	}
 	
 public static void startTimeline(){
     	
 	//here we control the rate at which the ghost moves in miliseconds
-    	timeLine = new Timeline(new KeyFrame(Duration.millis(500), event -> {
+    	timeLine = new Timeline(new KeyFrame(Duration.millis(200), event ->
+    	{
     		redGhost.moveGhost();
-    		
+    		eeeeredrawMap();
     			}));
     	timeLine.setCycleCount(Timeline.INDEFINITE);
     	timeLine.play();
     	
     }
+
+public static void initGrid()
+{
+	grid = new Grid();
+	
+    for (int i =0;i< Constants.gridHeight;i++){
+    	
+        for (int j =0;j< Constants.gridWidth;j++){
+        	
+        	Location cellLocation = new Location(i,j);
+        	
+        	
+        	//Check if not boundary
+        	int type = Constants.OBSTACLE;
+        	if ( j != Constants.gridWidth-1 && i != Constants.gridHeight-1 && i != 0 && j!= 0){
+        		if (j == player.getCoordinate().getYlocation() && i ==player.getCoordinate().getXlocation())
+        			type = Constants.EMPTY;
+        		
+        		else if (isObstacle(cellLocation))
+        			type = Constants.OBSTACLE;
+        		
+        		else {
+        			type = Constants.FOOD;
+        			foodCount++;
+        		}
+        		
+        		
+        	}
+        	System.out.print(type);
+
+        	Cell cell = new Cell(cellLocation,type);
+        	grid.addCell(cell);
+        	
+        	
+            root.getChildren().add(cell.getNode());
+        }
+    	System.out.println();
+    }
+    
+}
 
 			
 	//-----Getters-------------------------------	

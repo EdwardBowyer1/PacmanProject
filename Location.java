@@ -4,8 +4,8 @@ import javafx.stage.Screen;
 public class Location {
 	//instance variables
 	//grid cell count horizontally/vertically
-	private int xlocation; // i in matrix notation  ******************************************!!
-	private int ylocation; // j in matrix notation	******************************************!!
+	private double xlocation; // i in matrix notation  ******************************************!!
+	private double ylocation; // j in matrix notation	******************************************!!
 	
 	
 	private double pixelW; //why do we need this? Cant we just refer to constant class ANS-> Because its the how many pixels from (0,0) to this location, its a multiple of cell pixels dimensions 
@@ -22,7 +22,7 @@ public class Location {
 		setYlocation(0);
 	}
 	//receives an x and y location of the grid, not in pixel form
-	public Location(int xlocation, int ylocation) 
+	public Location(double xlocation, double ylocation) 
 	{
 		setXlocation(xlocation);
 		setYlocation(ylocation);
@@ -73,22 +73,22 @@ public class Location {
 		return "Coordinate: (" + xlocation + ", " + ylocation + ")";
 	}
 	//getters and setters
-	public int getXlocation() {
+	public double getXlocation() {
 		return xlocation;
 	}
 
-	public int getYlocation() {
+	public double getYlocation() {
 		return ylocation;
 	}
 
-	public void setXlocation(int xlocation) {
+	public void setXlocation(double xlocation) {
 		if(xlocation>=0) //add other bound
 		{
 			this.xlocation = xlocation;
 			setPixelH(xlocation*Constants.cellHeight);
 		}
 	}
-	public void setYlocation(int ylocation) {
+	public void setYlocation(double ylocation) {
 		if(ylocation>=0) //add other bound
 		{
 			this.ylocation = ylocation;

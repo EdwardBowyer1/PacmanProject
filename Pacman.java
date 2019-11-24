@@ -26,8 +26,8 @@ public class Pacman extends Character {
 	
 	public boolean moveUp()
 	{
-		 int xlocation  = getCoordinate().getXlocation(); //X and Y locations 
-		int ylocation  = getCoordinate().getYlocation();
+		double xlocation  = getCoordinate().getXlocation(); //X and Y locations 
+		double ylocation  = getCoordinate().getYlocation();
 		//Checks one block above Pacman before moving
 		PacImage.setRotate(-90);
 		if (Map.grid.getCell(xlocation-1, ylocation).getType() == Constants.OBSTACLE)
@@ -54,8 +54,8 @@ public class Pacman extends Character {
 	
 	public boolean moveDown()
 	{
-		 int xlocation  = getCoordinate().getXlocation(); //X and Y locations 
-			int ylocation  = getCoordinate().getYlocation();
+		double xlocation  = getCoordinate().getXlocation(); //X and Y locations 
+		double ylocation  = getCoordinate().getYlocation();
 			PacImage.setRotate(90);
 		//Checks if location below Pacman is an OBSTACLE
 		if (Map.grid.getCell(xlocation+1, ylocation).getType() == Constants.OBSTACLE)
@@ -81,8 +81,8 @@ public class Pacman extends Character {
 	public boolean moveLeft()
 	{
 		
-		 int xlocation  = getCoordinate().getXlocation(); //X and Y locations 
-			int ylocation  = getCoordinate().getYlocation();
+		 double xlocation  = getCoordinate().getXlocation(); //X and Y locations 
+		 double ylocation  = getCoordinate().getYlocation();
 			
 			PacImage.setRotate(180);
 		if (Map.grid.getCell(xlocation, ylocation-1).getType() == Constants.OBSTACLE)
@@ -108,8 +108,8 @@ public class Pacman extends Character {
 
 	public boolean moveRight() 
 	{
-		 int xlocation  = getCoordinate().getXlocation(); //X and Y locations 
-			int ylocation  = getCoordinate().getYlocation();
+		double xlocation  = getCoordinate().getXlocation(); //X and Y locations 
+		double ylocation  = getCoordinate().getYlocation();
 		
 			PacImage.setRotate(0);
 		if (Map.grid.getCell(xlocation, ylocation+1).getType() == Constants.OBSTACLE)
