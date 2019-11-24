@@ -19,7 +19,7 @@ public class TextGame
 	//Game starts here
 	TextGame myapp = new TextGame();
 	Scanner playerInput = new Scanner (System.in);
-	Map m1 = new Map();
+	TEXTMap m1 = new TEXTMap();
 
 	myapp.isRunning = true;
 
