@@ -5,7 +5,7 @@ public class Location {
 	//instance variables
 	//grid cell count horizontally/vertically
 	private int xlocation; // i in matrix notation  ******************************************!!
-	private int ylocation; // j in''				******************************************!!
+	private int ylocation; // j in matrix notation	******************************************!!
 	
 	
 	private double pixelW; //why do we need this? Cant we just refer to constant class ANS-> Because its the how many pixels from (0,0) to this location, its a multiple of cell pixels dimensions 
@@ -33,17 +33,19 @@ public class Location {
 	}
 	
 	//Methods
-	
+	/**
+	 * This function displays the monitor screen width and height in pixels printed to console
+	 */
 	public static void initScreenDimensions()
 	{
 		
         Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
-        Constants.screenWidth = primaryScreenBounds.getWidth();
-        Constants.screenHeight = primaryScreenBounds.getHeight();
+//        Constants.screenWidth = primaryScreenBounds.getWidth();
+//        Constants.screenHeight = primaryScreenBounds.getHeight();
         
         //limiting the printouts to console
         if(tracker==0)
-         System.out.println("width: " +Constants.screenWidth + " height: " + Constants.screenHeight + " \n" + primaryScreenBounds.toString());
+         System.out.println("screenWidth: " +Constants.screenWidth + " screenHeight: " + Constants.screenHeight + " \n" + primaryScreenBounds.toString());
         
         tracker++;
 	}
@@ -62,6 +64,10 @@ public class Location {
 			setXlocation(xlocation + xChange);
 			setYlocation(ylocation + yChange);
 		}
+	
+	/**
+	 * Returns a string of of the i and j location 
+	 */
 	public String toString()
 	{
 		return "Coordinate: (" + xlocation + ", " + ylocation + ")";

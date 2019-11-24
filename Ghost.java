@@ -7,14 +7,10 @@ import javafx.scene.shape.Circle;
 public class Ghost extends Character {
 
 	
-	private int pacXlocation  = Map.player.getCoordinate().getXlocation(); //X and Y locations
-	private int pacYlocation  = Map.player.getCoordinate().getYlocation();
-//
-//	private int ghostXlocation = getCoordinate().getXlocation();
-//	private int ghostYlocation = getCoordinate().getYlocation();
+
 
 	private Node node;
-	public static ImageView redGhostImage = new ImageView(Constants.GIFRedGhost);
+	private  ImageView redGhostImage = new ImageView(Constants.GIFRedGhost);
 	
 	// constructor
 
@@ -26,8 +22,10 @@ public class Ghost extends Character {
 	public void moveGhost(){
 
 
-		int ghostXlocation = getCoordinate().getXlocation();
-		int ghostYlocation = getCoordinate().getYlocation();
+		 int pacXlocation  = Map.player.getCoordinate().getYlocation(); //X and Y locations
+		 int pacYlocation  = Map.player.getCoordinate().getXlocation(); //swapped the x and y location due to confusion of x,y being [i][j] notation
+		int ghostXlocation = getCoordinate().getYlocation();			// Ylocation represents width of grid "Traditional x axis"
+		int ghostYlocation = getCoordinate().getXlocation();			//Xlocation represents height of grid "traditional y axis"
 		Random rand = new Random();
 	    int randomNum = rand.nextInt((3 - 0) + 1) + 0;
 
@@ -82,8 +80,8 @@ public class Ghost extends Character {
 	    }
 
 	    if (ghostYlocation == pacYlocation && ghostXlocation == pacXlocation ){
-	    	//Map.gameEnded();
-	    	Map.redrawMap();
+	    	Map.gameOver();
+	    	//Map.redrawMap();
 		}else{
     		Map.redrawMap();
 		}
@@ -93,8 +91,8 @@ public class Ghost extends Character {
 
 	public  boolean moveUp(){
 
-		int ghostXlocation = getCoordinate().getXlocation();
-		int ghostYlocation = getCoordinate().getYlocation();
+		int ghostXlocation = getCoordinate().getYlocation();
+		int ghostYlocation = getCoordinate().getXlocation();
 		if (Map.grid.getCell(ghostYlocation-1, ghostXlocation).getType() == Constants.OBSTACLE)
 			return false;
 
@@ -108,8 +106,8 @@ public class Ghost extends Character {
 
 	public  boolean moveDown(){
 
-		int ghostXlocation = getCoordinate().getXlocation();
-		int ghostYlocation = getCoordinate().getYlocation();
+		int ghostXlocation = getCoordinate().getYlocation();
+		int ghostYlocation = getCoordinate().getXlocation();
 		if (Map.grid.getCell(ghostYlocation+1, ghostXlocation).getType() == Constants.OBSTACLE)
 			return false;
 
@@ -124,8 +122,8 @@ public class Ghost extends Character {
 	public  boolean moveLeft(){
 
 
-		int ghostXlocation = getCoordinate().getXlocation();
-		int ghostYlocation = getCoordinate().getYlocation();
+		int ghostXlocation = getCoordinate().getYlocation();
+		int ghostYlocation = getCoordinate().getXlocation();
 		if (Map.grid.getCell(ghostYlocation,ghostXlocation-1).getType() == Constants.OBSTACLE)
 			return false;
 
@@ -140,8 +138,8 @@ public class Ghost extends Character {
 
 	public  boolean moveRight(){
 
-		int ghostXlocation = getCoordinate().getXlocation();
-		int ghostYlocation = getCoordinate().getYlocation();
+		int ghostXlocation = getCoordinate().getYlocation();
+		int ghostYlocation = getCoordinate().getXlocation();
 
 		if (Map.grid.getCell(ghostYlocation, ghostXlocation+1).getType() == Constants.OBSTACLE)
 			return false;
@@ -161,7 +159,7 @@ public class Ghost extends Character {
 		double ypixel= getCoordinate().getPixelH();
 
 		double min = Constants.cellHeight;
-		if (Constants.cellWidth > Constants.cellHeight)
+		if (Constants.cellWidth < Constants.cellHeight)
 			min = Constants.cellWidth;
 
 		redGhostImage.setFitWidth(min);

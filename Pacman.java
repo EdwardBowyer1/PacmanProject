@@ -8,7 +8,7 @@ public class Pacman extends Character {
 	
 	private static int score;
 	private static Node node;
-	public static ImageView PacImage = new ImageView(Constants.GIFPacRight);
+	private ImageView PacImage;
 	
 	
 //----constructors---------------------------------------------------
@@ -17,6 +17,7 @@ public class Pacman extends Character {
 	{
 		super(toCopy); 
 		setScore(0);
+		PacImage = new ImageView(Constants.GIFPacRight);
 	}
 
 	
@@ -28,11 +29,12 @@ public class Pacman extends Character {
 		 int xlocation  = getCoordinate().getXlocation(); //X and Y locations 
 		int ylocation  = getCoordinate().getYlocation();
 		//Checks one block above Pacman before moving
+		PacImage.setRotate(-90);
 		if (Map.grid.getCell(xlocation-1, ylocation).getType() == Constants.OBSTACLE)
 			return false;
 		
 		//Constants.PACMAN_IMAGE.setRotate();
-		PacImage.setRotate(-90);
+	
 		
 		//Changes location of Pacman (moves him up by one)
 		Location temp = new Location(xlocation-1, ylocation);
@@ -40,8 +42,9 @@ public class Pacman extends Character {
 		
 		if (Map.grid.getCell(xlocation-1, ylocation).getType() == Constants.FOOD)
 		{
-			Pacman.setScore(Pacman.getScore() + 1); //Increase the score
+			setScore(getScore() + 10); //Increase the score
 			Map.grid.getCell(xlocation-1, ylocation).setType(Constants.EMPTY);
+			Map.foodCount--;
 		}    	
 		Map.redrawMap();
     	
@@ -53,19 +56,21 @@ public class Pacman extends Character {
 	{
 		 int xlocation  = getCoordinate().getXlocation(); //X and Y locations 
 			int ylocation  = getCoordinate().getYlocation();
+			PacImage.setRotate(90);
 		//Checks if location below Pacman is an OBSTACLE
 		if (Map.grid.getCell(xlocation+1, ylocation).getType() == Constants.OBSTACLE)
 			return false;
 		
-		PacImage.setRotate(90);
+	
 		
 		Location temp = new Location(xlocation+1, ylocation);
 		super.setCoordinate(temp);
 		
 		if (Map.grid.getCell(xlocation+1, ylocation).getType() == Constants.FOOD)
 		{
-			Pacman.setScore(Pacman.getScore() + 1);
+			setScore(getScore() + 10);
 			Map.grid.getCell(xlocation+1, ylocation).setType(Constants.EMPTY);
+			Map.foodCount--;
 		}
     	Map.redrawMap();
     	
@@ -78,18 +83,21 @@ public class Pacman extends Character {
 		
 		 int xlocation  = getCoordinate().getXlocation(); //X and Y locations 
 			int ylocation  = getCoordinate().getYlocation();
+			
+			PacImage.setRotate(180);
 		if (Map.grid.getCell(xlocation, ylocation-1).getType() == Constants.OBSTACLE)
 			return false;
 		
-		PacImage.setRotate(180);
+	
 
 		Location temp = new Location(xlocation, ylocation-1);
 		super.setCoordinate(temp);
 		
 		if (Map.grid.getCell(xlocation, ylocation-1).getType() == Constants.FOOD)
 		{
-			Pacman.setScore(Pacman.getScore() + 1);
+			setScore(getScore() + 10);
 			Map.grid.getCell(xlocation, ylocation-1).setType(Constants.EMPTY);
+			Map.foodCount--;
 		}   	
 		
 		Map.redrawMap();
@@ -103,18 +111,20 @@ public class Pacman extends Character {
 		 int xlocation  = getCoordinate().getXlocation(); //X and Y locations 
 			int ylocation  = getCoordinate().getYlocation();
 		
+			PacImage.setRotate(0);
 		if (Map.grid.getCell(xlocation, ylocation+1).getType() == Constants.OBSTACLE)
 			return false;
 		
-		PacImage.setRotate(0);
+		
 		
 		Location temp = new Location(xlocation, ylocation+1);
 		super.setCoordinate(temp);
 		
 		if (Map.grid.getCell(xlocation, ylocation+1).getType() == Constants.FOOD)
 		{
-			Pacman.setScore(Pacman.getScore() + 1);
+			setScore(getScore() + 10);
 			Map.grid.getCell(xlocation, ylocation+1).setType(Constants.EMPTY);
+			Map.foodCount--;
 		} 
 		
 		Map.redrawMap();
@@ -128,14 +138,14 @@ public class Pacman extends Character {
 		double ypixel= getCoordinate().getPixelH();
 		
 		double min = Constants.cellHeight;
-		if (Constants.cellWidth > Constants.cellHeight)
+		if (Constants.cellWidth < Constants.cellHeight)
 			min = Constants.cellWidth;
 		
 		PacImage.setFitWidth(min);
 		PacImage.setFitHeight(min);
 
-		PacImage.setX(xpixel);//+position.width/2 - min/2);
-		PacImage.setY(ypixel);//+position.height/2 - min/2);
+		PacImage.setX(xpixel);
+		PacImage.setY(ypixel);
 		
 		node = PacImage;
 		
@@ -145,13 +155,13 @@ public class Pacman extends Character {
 
 
 
-	public static int getScore() {
+	public int getScore() {
 		return score;
 	}
 
 
 
-	public static void setScore(int score) {
+	public void setScore(int score) {
 		Pacman.score = score;
 	}
 
