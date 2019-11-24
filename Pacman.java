@@ -1,60 +1,171 @@
+import javafx.scene.Node;
+import javafx.scene.image.ImageView;
 
 public class Pacman extends Character {
-
-	public final int dX = 1;
-	public final int dY = 1;
+//	private int xlocation  = getCoordinate().getXlocation(); //X and Y locations 
+//	private int ylocation  = getCoordinate().getYlocation();
 	
-	//instance variables
-	private int lives;
-	private String name;
-
-	//constructors
-	//can constructother pacman qualities here later
-	public Pacman(Location toCopy) {
-		super(toCopy);
-		setLives(3);
-		setName("Pacman");
-	}
-
-    //Methods
-	//to control movement
 	
-    public void Move(char input)
-    {
-        if (input == 'a')
-        	getCoordinate().changeLocation(-dX,0);
-        else if (input == 'w')
-        	getCoordinate().changeLocation(0,-dY);
-        else if (input == 's')
-        	getCoordinate().changeLocation(0,dY);
-        else if (input == 'd')
-        	getCoordinate().changeLocation(dX,0);
-    }
-
-	/**
-	 * @return the lives
-	 */
-	public int getLives() {
-		return lives;
-	}
-
-	/**
-	 * @param lives the lives to set
-	 */
-	public void setLives(int lives) {
-		this.lives = lives;
-	}
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-	public String toString()
+	private static int score;
+	private static Node node;
+	private ImageView PacImage;
+	
+	
+//----constructors---------------------------------------------------
+	
+	public Pacman(Location toCopy) 
 	{
-		return name +" " + super.toString();
-		
+		super(toCopy); 
+		setScore(0);
+		PacImage = new ImageView(Constants.GIFPacRight);
 	}
+
+	
+
+//----Methods----------------------------------------------------------------
+	
+	public boolean moveUp()
+	{
+		 int xlocation  = getCoordinate().getXlocation(); //X and Y locations 
+		int ylocation  = getCoordinate().getYlocation();
+		//Checks one block above Pacman before moving
+		PacImage.setRotate(-90);
+		if (Map.grid.getCell(xlocation-1, ylocation).getType() == Constants.OBSTACLE)
+			return false;
+		
+		//Constants.PACMAN_IMAGE.setRotate();
+	
+		
+		//Changes location of Pacman (moves him up by one)
+		Location temp = new Location(xlocation-1, ylocation);
+		super.setCoordinate(temp);
+		
+		if (Map.grid.getCell(xlocation-1, ylocation).getType() == Constants.FOOD)
+		{
+			setScore(getScore() + 10); //Increase the score
+			Map.grid.getCell(xlocation-1, ylocation).setType(Constants.EMPTY);
+			Map.foodCount--;
+		}    	
+		Map.redrawMap();
+    	
+    	return true;
+	
+	}
+	
+	public boolean moveDown()
+	{
+		 int xlocation  = getCoordinate().getXlocation(); //X and Y locations 
+			int ylocation  = getCoordinate().getYlocation();
+			PacImage.setRotate(90);
+		//Checks if location below Pacman is an OBSTACLE
+		if (Map.grid.getCell(xlocation+1, ylocation).getType() == Constants.OBSTACLE)
+			return false;
+		
+	
+		
+		Location temp = new Location(xlocation+1, ylocation);
+		super.setCoordinate(temp);
+		
+		if (Map.grid.getCell(xlocation+1, ylocation).getType() == Constants.FOOD)
+		{
+			setScore(getScore() + 10);
+			Map.grid.getCell(xlocation+1, ylocation).setType(Constants.EMPTY);
+			Map.foodCount--;
+		}
+    	Map.redrawMap();
+    	
+    	return true;
+
+	}
+	
+	public boolean moveLeft()
+	{
+		
+		 int xlocation  = getCoordinate().getXlocation(); //X and Y locations 
+			int ylocation  = getCoordinate().getYlocation();
+			
+			PacImage.setRotate(180);
+		if (Map.grid.getCell(xlocation, ylocation-1).getType() == Constants.OBSTACLE)
+			return false;
+		
+	
+
+		Location temp = new Location(xlocation, ylocation-1);
+		super.setCoordinate(temp);
+		
+		if (Map.grid.getCell(xlocation, ylocation-1).getType() == Constants.FOOD)
+		{
+			setScore(getScore() + 10);
+			Map.grid.getCell(xlocation, ylocation-1).setType(Constants.EMPTY);
+			Map.foodCount--;
+		}   	
+		
+		Map.redrawMap();
+
+    	return true;
+	}
+	
+
+	public boolean moveRight() 
+	{
+		 int xlocation  = getCoordinate().getXlocation(); //X and Y locations 
+			int ylocation  = getCoordinate().getYlocation();
+		
+			PacImage.setRotate(0);
+		if (Map.grid.getCell(xlocation, ylocation+1).getType() == Constants.OBSTACLE)
+			return false;
+		
+		
+		
+		Location temp = new Location(xlocation, ylocation+1);
+		super.setCoordinate(temp);
+		
+		if (Map.grid.getCell(xlocation, ylocation+1).getType() == Constants.FOOD)
+		{
+			setScore(getScore() + 10);
+			Map.grid.getCell(xlocation, ylocation+1).setType(Constants.EMPTY);
+			Map.foodCount--;
+		} 
+		
+		Map.redrawMap();
+
+    	return true;
+	}
+	
+	public Node getNode()
+	{
+		double xpixel = getCoordinate().getPixelW(); //x location in pixels. (x * cell_width)
+		double ypixel= getCoordinate().getPixelH();
+		
+		double min = Constants.cellHeight;
+		if (Constants.cellWidth < Constants.cellHeight)
+			min = Constants.cellWidth;
+		
+		PacImage.setFitWidth(min);
+		PacImage.setFitHeight(min);
+
+		PacImage.setX(xpixel);
+		PacImage.setY(ypixel);
+		
+		node = PacImage;
+		
+	return node;
+	
+}
+
+
+
+	public int getScore() {
+		return score;
+	}
+
+
+
+	public void setScore(int score) {
+		Pacman.score = score;
+	}
+
+
+	
 
 }

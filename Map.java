@@ -1,237 +1,284 @@
- 
+
+
+
+//import java.awt.Color;
+//import java.awt.Font;
+import java.util.ArrayList;
+
+
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.scene.Scene;
+import javafx.scene.input.KeyCode;
+import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.*;
+import javafx.stage.Stage;
+import javafx.util.Duration;
 
 public class Map {
 	
 	//Instance variables-------------------------------------------
-	private Pacman player;
-	//need to add the rest of the gameobjects
-	private int[][] grid = { {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
-	          				 {1,1,1,1,1,2,2,2,2,2,2,2,2,2,2,2,2,1,1,2,2,2,2,2,2,2,2,2,2,2,2,1,1,1,1,1},
-	          				 {1,1,1,1,1,2,1,1,1,1,2,1,1,1,1,1,2,1,1,2,1,1,1,1,1,2,1,1,1,1,2,1,1,1,1,1},
-	          				 {1,1,1,1,1,3,1,1,1,1,2,1,1,1,1,1,2,1,1,2,1,1,1,1,1,2,1,1,1,1,3,1,1,1,1,1},
-	          				 {1,1,1,1,1,2,1,1,1,1,2,1,1,1,1,1,2,1,1,2,1,1,1,1,1,2,1,1,1,1,2,1,1,1,1,1},
-	          				 {1,1,1,1,1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1,1,1,1,1},
-	          				 {1,1,1,1,1,2,1,1,1,1,2,1,1,2,1,1,1,1,1,1,1,1,2,1,1,2,1,1,1,1,2,1,1,1,1,1},
-				          	 {1,1,1,1,1,2,1,1,1,1,2,1,1,2,1,1,1,1,1,1,1,1,2,1,1,2,1,1,1,1,2,1,1,1,1,1},
-	    			      	 {1,1,1,1,1,2,2,2,2,2,2,1,1,2,2,2,2,1,1,2,2,2,2,1,1,2,2,2,2,2,2,1,1,1,1,1},
-	        			  	 {1,1,1,1,1,1,1,1,1,1,2,1,1,1,1,1,0,1,1,0,1,1,1,1,1,2,1,1,1,1,1,1,1,1,1,1},
-	        			  	 {1,1,1,1,1,1,1,1,1,1,2,1,1,1,1,1,0,1,1,0,1,1,1,1,1,2,1,1,1,1,1,1,1,1,1,1},
-	        			  	 {1,1,1,1,1,1,1,1,1,1,2,1,1,0,0,0,0,0,0,0,0,0,0,1,1,2,1,1,1,1,1,1,1,1,1,1},
-				          	 {1,1,1,1,1,1,1,1,1,1,2,1,1,0,1,1,1,1,1,1,1,1,0,1,1,2,1,1,1,1,1,1,1,1,1,1},
-				          	 {1,1,1,1,1,1,1,1,1,1,2,1,1,0,1,1,0,0,0,0,1,1,0,1,1,2,1,1,1,1,1,1,1,1,1,1},
-	        			  	 {1,0,0,0,2,2,2,2,2,2,2,0,0,0,1,1,0,0,0,0,1,1,0,0,0,2,2,2,2,2,2,2,0,0,0,1},
-	        			  	 {1,1,1,1,1,1,1,1,1,1,2,1,1,0,1,1,1,1,1,1,1,1,0,1,1,2,1,1,1,1,1,1,1,1,1,1},
-	        		  		 {1,1,1,1,1,1,1,1,1,1,2,1,1,0,1,1,1,1,1,1,1,1,0,1,1,2,1,1,1,1,1,1,1,1,1,1},
-			        	  	 {1,1,1,1,1,1,1,1,1,1,2,1,1,0,0,0,0,0,0,0,0,0,0,1,1,2,1,1,1,1,1,1,1,1,1,1},
-	          				 {1,1,1,1,1,1,1,1,1,1,2,1,1,0,1,1,1,1,1,1,1,1,0,1,1,2,1,1,1,1,1,1,1,1,1,1},
-	    			      	 {1,1,1,1,1,1,1,1,1,1,2,1,1,0,1,1,1,1,1,1,1,1,0,1,1,2,1,1,1,1,1,1,1,1,1,1},
-	    			      	 {1,1,1,1,1,2,2,2,2,2,2,2,2,2,2,2,2,1,1,2,2,2,2,2,2,2,2,2,2,2,2,1,1,1,1,1},
-	    			      	 {1,1,1,1,1,2,1,1,1,1,2,1,1,1,1,1,2,1,1,2,1,1,1,1,1,2,1,1,1,1,2,1,1,1,1,1},
-	    			      	 {1,1,1,1,1,2,1,1,1,1,2,1,1,1,1,1,2,1,1,2,1,1,1,1,1,2,1,1,1,1,2,1,1,1,1,1},
-	    			      	 {1,1,1,1,1,3,2,2,1,1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1,1,2,2,3,1,1,1,1,1},
-	     			     	 {1,1,1,1,1,1,1,2,1,1,2,1,1,2,1,1,1,1,1,1,1,1,2,1,1,2,1,1,2,1,1,1,1,1,1,1},
-	     			     	 {1,1,1,1,1,1,1,2,1,1,2,1,1,2,1,1,1,1,1,1,1,1,2,1,1,2,1,1,2,1,1,1,1,1,1,1},
-	     			     	 {1,1,1,1,1,2,2,2,2,2,2,1,1,2,2,2,2,1,1,2,2,2,2,1,1,2,2,2,2,2,2,1,1,1,1,1},
-	      			    	 {1,1,1,1,1,2,1,1,1,1,1,1,1,1,1,1,2,1,1,2,1,1,1,1,1,1,1,1,1,1,2,1,1,1,1,1},
-	      			    	 {1,1,1,1,1,2,1,1,1,1,1,1,1,1,1,1,2,1,1,2,1,1,1,1,1,1,1,1,1,1,2,1,1,1,1,1},
-	       				 	 {1,1,1,1,1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1,1,1,1,1},
-	       			   	 	 {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}};
-	private int height; //30
-	private int width; //36
-	private Location startLocation;
+	protected static Pane root;
+	public static Grid grid;
+	public static Grid originalGrid;
+	public static Timeline timeLine;
+	public static Scene scene;
+	public static Stage stage;
+	public static Text text;
+	//public static Boolean noMoreFood = false;
+	public static int foodCount = 0;
+	public static int originalFoodCount;
+	
+	//intital starting point of pacman, matrix notation
+	static int initIM = 1;
+	static int initJM = 1;
+	
+	private static Location startLocation = new Location(initIM, initJM);
+	private static Location ghostStartLocation = new Location(1,5);
+	private static Location scorePosition = new Location(1,Constants.gridWidth/2-2);
+
+	public static Pacman player = new Pacman(startLocation);
+	public static Ghost redGhost = new Ghost (ghostStartLocation);
+	public static ArrayList<Location> obstacles = new ArrayList<>();
 
 	//Constructors-------------------------------------------------
 	public Map()
 	{
-		setHeight(grid.length); //consider making a wrapper class for length;
-		setWidth(grid[0].length);
-		startLocation = new Location((width-1)/2, 5);
-		player = new Pacman(startLocation);
+		
 	}
-	//Methods------------------------------------------------------
+
+	public  Stage generateMap (Stage primaryStage){ 
+		stage = primaryStage;
+		//loading pacman GIF from constants to imageView class
 	
-	// Argument is the input from console 
-	
-	// Returns true if the space in front of the character is empty (not a 1 on the grid).
-	
-		public boolean canMoveCharacter(char directionInput) 
-		{
-			int PacX = player.getCoordinate().getXlocation() ;
-			int PacY = player.getCoordinate().getYlocation();
-			if(directionInput == 'w')
-			{
-				System.out.println("Next grid element: " +grid[PacX][PacY-1]); //meant to debug the issue of 
-																			   //not being able to access block before wall(width). 
-				if(grid[PacX][PacY-1] != 1)
-				{
-					return true;
-				}
-			}
-			else if(directionInput == 's')
-			{
-				System.out.println("Next grid element: " +grid[PacX][PacY+1]);
-				if(grid[PacX][PacY+2] != 1)
-				{
-					return true;
-				}
-			}
-			else if(directionInput == 'a')
-			{
-				System.out.println("Next grid element: " +grid[PacX-1][PacY]);
-				if(grid[PacX-1][PacY] != 1)
-				{
-					return true;
-				}
-			}
+		root = new Pane(); 
+		root.setStyle("-fx-background-color: black");
+
+		double ScreenW = Constants.screenWidth;
+		double ScreenH = Constants.screenHeight;
 		
-			else if(directionInput == 'd')
-			{
-				System.out.println("Next grid element: " +grid[PacX+1][PacY]);
-				if(grid[PacX+1][PacY] != 1)
-				{
-					return true;
-				}
-			}
-				return false;
-		}
+		initializeObstacles();
 		
-		public void printMap()
+		stage.setTitle("Pacman Demo2");
+		
+		
+		// HERE IS WHERE THE INITIAL GRID POPULATING OCCURS--------------------------------------------------------------------------------
+		grid = new Grid();
+	
+        for (int i =0;i< Constants.gridHeight;i++){
+        	
+            for (int j =0;j< Constants.gridWidth;j++){
+            	
+            	Location cellLocation = new Location(i,j);
+            	
+            	
+            	//Check if not boundary
+            	int type = Constants.OBSTACLE;
+            	if ( j != Constants.gridWidth-1 && i != Constants.gridHeight-1 && i != 0 && j!= 0){
+            		if (j == player.getCoordinate().getYlocation() && i ==player.getCoordinate().getXlocation())
+            			type = Constants.EMPTY;
+            		
+            		else if (isObstacle(cellLocation))
+            			type = Constants.OBSTACLE;
+            		
+            		else {
+            			type = Constants.FOOD;
+            			foodCount++;
+            		}
+            		
+            		
+            	}
+            	System.out.print(type);
+
+            	Cell cell = new Cell(cellLocation,type);
+            	grid.addCell(cell);
+            	
+            	
+                root.getChildren().add(cell.getNode());
+            }
+        	System.out.println();
+        }
+        
+        originalFoodCount = foodCount;
+        originalGrid = new Grid(grid);
+		
+        Location scorePosition = new Location(0, Constants.gridWidth-5);
+		 //iView.setPreserveRatio(true);  
+        
+        //create function for this
+        text = new Text();
+
+		 
+		 root.getChildren().add(text);
+
+		
+		Scene scene = new Scene(root,ScreenW,ScreenH);
+	    stage.setScene(scene);
+
+	   
+		return stage;
+	
+
+		
+		
+	}
+	
+	
+	public static void initializeObstacles()
+	{
+
+	
+		for(int i = 2; i<Constants.gridWidth-2; i++)
 		{
-			//need the character coordintes of pacman, setting local variable
-			int PacX = player.getCoordinate().getXlocation();
-			int PacY = player.getCoordinate().getYlocation();
-			 //these loops print out the grid to whatever we want to graphically output
-			for(int i = 0; i< height; i++)
-			{
-				for(int j = 0; j< width; j++)
-				{
-					if (j == PacX && i == PacY) //must check this first
-						System.out.print('C');
-					else if(grid[i][j] == 0)
-						System.out.print(' ');
-					else if(grid[i][j] == 1)
-						System.out.print('#');
-					else if(grid[i][j] == 2)
-						System.out.print('.');
-					else if(grid[i][j] == 3)
-						System.out.print('x');
+			for(int j=2; j<Constants.gridHeight-1; j++) {
+				if(i!=7 && j%2==0) {
+					obstacles.add(new Location(j, i));
+
 				}
-				System.out.println();
-			}
 		}
+		}
+
+			
+		
+		
+		
+	}
+	public static boolean isObstacle(Location pObstacle)
+	{
+		for(int i = 0; i<obstacles.size(); i++)
+		{
+			if(pObstacle.isEqual(obstacles.get(i)))
+				return true;
+		}
+			return false;
+	}
+	
+	
+	//-------------------------------------------------------------------------------------------------------------------------------------------*********************************************************
+	public static  void redrawMap()
+	{
+
+		
+		
+		//Location.initScreenDimensions();
+
+		
+		root.getChildren().clear();
+		
+		//redrawwing the map from the grid and checking to see if the food is finished
+		if(foodCount==0)
+		{
+			//should be resetting the map
+			grid = new Grid(originalGrid);
+			grid.toConsole();
+			foodCount = originalFoodCount;
+		}
+//		
+//		int completeFood = 0;
+		for (int i = 0;i < Constants.gridHeight-1;i++)
+		{
+			for (int j = 0;j < Constants.gridWidth-1;j++)
+			{
+                root.getChildren().add(grid.getCell(i, j).getNode());
+                
+                
+            }
+		}
+
+			root.getChildren().add(player.getNode());
+		
+			root.getChildren().add(redGhost.getNode());
+		
+			
+			text = new Text();
+			 text.setY(scorePosition.getPixelH()-20);
+			 text.setX(scorePosition.getPixelW()+100);
+			 //System.out.print(scorePosition.getPixelW() +  "height:"+scorePosition.getPixelH() +"here" );
+			 text.setText("Score : "+player.getScore());
+			 text.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 20));
+			 text.setFill(Color.WHITE);
+
+			 text.setStroke(Color.LIGHTGOLDENRODYELLOW); 
+			
+			
+			root.getChildren().add(text);
+		
+			
+			root.requestFocus();
+	}
+	
+	public static void arrowKeyListener()
+	{
+		root.setOnKeyPressed(event -> {
+		
+		if (event.getCode() == KeyCode.UP)
+		{
+			player.moveUp();
+			redrawMap();
+		}
+		else if (event.getCode() == KeyCode.DOWN)
+		{
+			player.moveDown();
+			redrawMap();
+		}
+		else if (event.getCode() == KeyCode.LEFT)
+		{	
+			player.moveLeft();
+			redrawMap();
+		}
+		else if (event.getCode() == KeyCode.RIGHT)
+		{
+			player.moveRight();
+			redrawMap();
+		}
+		else if (event.getCode() == KeyCode.ESCAPE)
+		{
+			redrawMap();
+			//code to pause game
+		}
+		else if(event.getCode() == KeyCode.E)
+		{
+			foodCount = 0;
+			redrawMap();
+			
+		}
+		  //event.consume();
+		redrawMap();
+	});
+		
+	}
+	
+	public static void gameOver()
+	{
+		System.exit(1);
+	}
+	
+public static void startTimeline(){
+    	
+	//here we control the rate at which the ghost moves in miliseconds
+    	timeLine = new Timeline(new KeyFrame(Duration.millis(500), event -> {
+    		redGhost.moveGhost();
+    		
+    			}));
+    	timeLine.setCycleCount(Timeline.INDEFINITE);
+    	timeLine.play();
+    	
+    }
+
 			
 	//-----Getters-------------------------------	
-		public int getHeight() 
-		{
-			return height;
-		}
-			
-		public int getWidth() 
-		{
-			return width;
-		}
 		
 		public Pacman getPlayer() 
 		{
 			return player;
 		}
-
-		public int getGrid()
-		{
-			return grid;
-		}	
+			
 			
 			
 	//-----Setters-------------------------------
-		private void setHeight(int h)
-		{
-			height = h;
-		}
-		private void setWidth(int w)
-		{
-			width = w;
-		}
 
 
 }
-/* CODE FOR MAKING A WORKING GUI
-NOT SURE WHERE TO PUT IT IN/HOW TO SPLIT IT UP
-
-
-
-//Import required java files
-import java.awt.*;
-import javax.swing.*;
-import java.awt.event.*;
-import java.awt.geom.Point2D;
-import javax.swing.JApplet;
-import javax.swing.ImageIcon;
-import javax.swing.Timer;
-import javax.swing.JPanel;
-
-import java.util.*;
-import java.lang.*;
-
-
-
-public class GUIGame extends JPanel implements ActionListener 
-{
-    private Dimension d;
-    private final Font smallFont = new Font("Helvetica", Font.BOLD, 14);
-
-    private Image ii;
-    private final Color dotColor = new Color(192,192,0);
-    private Color mazeColor;   
-
-    //Can prob implement elsewhere
-    private boolean inGame = false;
-    private boolean dying = false;
-
-        private final int BLOCK_SIZE = 24;
-        private final int N_BLOCKS = 15;
-        private final int SCREEN_SIZE = 15*24; //to be fixed
-        private final int PAC_ANIM_DELAY = 2;
-        private final int PACMAN_ANIM_COUNT = 4;
-        private final int MAX_GHOSTS = 4; 
-        private final int PACMAN_SPEED = 6;
-
-        private int pacAnimCount = PAC_ANIM_DELAY;
-        private int pacAnimDir = 1;
-        private int pacmanAnimPos = 0;
-        private int N_GHOSTS = 4;
-        private int pacsLeft, score;
-        private int[] ghost_x, ghost_y, ghost_dx, ghost_dy, ghostSpeed;
-        private int[] dx,dy;
-
-        private int currentSpeed = 3;
-        private short[] screenData;
-        private Timer timer;
-    public GUIGame()
-    {
-        loadImages();
-        initVariables();
-        initBoard();
-    }
-
-    private void initBoard()
-    {
-        addKeyListener(new TAdapter());
-        setFocusable(true);
-        setBackground(Color.black);
-    }
-    
-    private void initVariables()
-    {
-        timer = new Timer(40, this);
-        timer.start();
-    }
-    private void loadImages()
-    {
-        
-        ghost = new ImageIcon("Images/ghost.png").getImage();
-
-        
-    }
-
-}
-*/

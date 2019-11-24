@@ -1,8 +1,19 @@
+import javafx.geometry.Rectangle2D;
+import javafx.stage.Screen;
 
 public class Location {
 	//instance variables
-	private int xlocation;
-	private int ylocation;
+	//grid cell count horizontally/vertically
+	private int xlocation; // i in matrix notation  ******************************************!!
+	private int ylocation; // j in matrix notation	******************************************!!
+	
+	
+	private double pixelW; //why do we need this? Cant we just refer to constant class ANS-> Because its the how many pixels from (0,0) to this location, its a multiple of cell pixels dimensions 
+	private double pixelH;
+	
+	public static int tracker = 0;
+
+
 	
 	//constructors
 	public Location()
@@ -10,6 +21,7 @@ public class Location {
 		setXlocation(0);
 		setYlocation(0);
 	}
+	//receives an x and y location of the grid, not in pixel form
 	public Location(int xlocation, int ylocation) 
 	{
 		setXlocation(xlocation);
@@ -21,6 +33,23 @@ public class Location {
 	}
 	
 	//Methods
+	/**
+	 * This function displays the monitor screen width and height in pixels printed to console
+	 */
+	public static void initScreenDimensions()
+	{
+		
+        Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
+//        Constants.screenWidth = primaryScreenBounds.getWidth();
+//        Constants.screenHeight = primaryScreenBounds.getHeight();
+        
+        //limiting the printouts to console
+        if(tracker==0)
+         System.out.println("screenWidth: " +Constants.screenWidth + " screenHeight: " + Constants.screenHeight + " \n" + primaryScreenBounds.toString());
+        
+        tracker++;
+	}
+	
 	
 	public boolean isEqual(Location old) //
 	{
@@ -35,6 +64,10 @@ public class Location {
 			setXlocation(xlocation + xChange);
 			setYlocation(ylocation + yChange);
 		}
+	
+	/**
+	 * Returns a string of of the i and j location 
+	 */
 	public String toString()
 	{
 		return "Coordinate: (" + xlocation + ", " + ylocation + ")";
@@ -49,20 +82,31 @@ public class Location {
 	}
 
 	public void setXlocation(int xlocation) {
-		if(xlocation>=0)
+		if(xlocation>=0) //add other bound
 		{
 			this.xlocation = xlocation;
-
+			setPixelH(xlocation*Constants.cellHeight);
 		}
 	}
 	public void setYlocation(int ylocation) {
-		if(ylocation>=0)
+		if(ylocation>=0) //add other bound
 		{
 			this.ylocation = ylocation;
-
+			setPixelW(ylocation*Constants.cellWidth);
 		}
 	}
-	
+	public double getPixelH() {
+		return pixelH;
+	}
+	public void setPixelH(double pixelH) {
+		this.pixelH = pixelH;
+	}
+	public double getPixelW() {
+		return pixelW;
+	}
+	public void setPixelW(double pixelW) {
+		this.pixelW = pixelW;
+	}
 	
 	
 }
