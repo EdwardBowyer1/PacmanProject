@@ -17,18 +17,13 @@ public class FxGame extends Application{
 	public void start(Stage primaryStage) throws Exception {
 		
 	
-        
-        Location.initScreenDimensions();
+        //Location.initScreenDimensions();
         
       Map map = new Map();
        
        map.generateMap(primaryStage).show();
-        
-        map.arrowKeyListener();
-        
-        map.redrawMap(); 
-		
-		map.startTimeline();
+       
+	 map.startTimeline();
 
 
         

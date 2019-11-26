@@ -81,9 +81,7 @@ public class Ghost extends Character {
 
 	    if (ghostYlocation == pacYlocation && ghostXlocation == pacXlocation ){
 	    	Map.gameOver();
-	    	//Map.redrawMap();
 		}else{
-    		//Map.redrawMap();
 		}
 
 

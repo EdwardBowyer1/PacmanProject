@@ -1,14 +1,15 @@
 
-
-
 //import java.awt.Color;
 //import java.awt.Font;
 import java.util.ArrayList;
 
 
 import javafx.animation.KeyFrame;
+import javafx.animation.PauseTransition;
 import javafx.animation.Timeline;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -25,13 +26,15 @@ import javafx.util.Duration;
 public class Map {
 	
 	//Instance variables-------------------------------------------
+	public static boolean running =true;
+	
 	protected static Pane root;
 	public static Grid grid;
 	public static Timeline timeLine;
 	public static Scene scene;
 	public static Stage stage;
 	public static Text score, highscore;
-	//public static Boolean noMoreFood = false;
+
 	public static int foodCount = 0;
 	public static int originalFoodCount;
 	
@@ -40,7 +43,7 @@ public class Map {
 	static int initJM = 1;
 	
 	private static Location startLocation = new Location(initIM, initJM);
-	private static Location ghostStartLocation = new Location(1,5);
+	private static Location ghostStartLocation = new Location(Constants.gridHeight-2,Constants.gridHeight-2);
 	private static Location scorePosition = new Location(0.5,0.2);
 
 	public static Pacman player = new Pacman(startLocation);
@@ -68,7 +71,7 @@ public class Map {
 		stage.setTitle("Pacman Demo2");
 		
 		
-		// HERE IS WHERE THE INITIAL GRID POPULATING OCCURS--------------------------------------------------------------------------------
+		// HERE IS WHERE THE INITIAL GRID POPULATING OCCURS and Pacman and the ghosts are initialized--------------------------------------------------------------------------------
 		initGrid();
 		
 		
@@ -123,9 +126,9 @@ public class Map {
 
 		
 		
-		//Location.initScreenDimensions();
-
-		
+		root.setStyle("-fx-background-color: black");
+		if(running) {
+			root.setStyle("-fx-background-color: black");
 		root.getChildren().clear();
 		
 		//redrawwing the map from the grid and checking to see if the food is finished
@@ -136,8 +139,7 @@ public class Map {
 			grid.toConsole();
 			foodCount = originalFoodCount;
 		}
-//		
-//		int completeFood = 0;
+
 		for (int i = 0;i < Constants.gridHeight;i++)
 		{
 			for (int j = 0;j < Constants.gridWidth;j++)
@@ -156,26 +158,25 @@ public class Map {
 			score  = new Text();
 			highscore = new Text();
 			
-			String S = "Score : "+player.getScore();
-			String H = "Highscore:";
-			
-			score = setText(score,scorePosition,S);
-			highscore = setText(highscore,new Location(0.5,10),H);
+			score = setText(scorePosition,"Score : "+ Integer.toString(player.getScore()),20);
+			highscore = setText(new Location(0.5,10),"High Score : ",20); // + retrieveHighscore());
 			
 			root.getChildren().add(score);
 			root.getChildren().add(highscore);
 			
 			root.requestFocus();
+		}
 	}
 	
-	public static Text setText(Text text, Location scorePosition, String textV )
+	public static Text setText(Location scorePosition, String textV, int size )
 	{
+		Text text = new Text();
 		 text.setY(scorePosition.getPixelH());
 		 text.setX(scorePosition.getPixelW());
 		 //System.out.print(scorePosition.getPixelW() +  "height:"+scorePosition.getPixelH() +"here" );
 		 text.setText(textV);
-		 text.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 20));
-		 text.setFill(Color.WHITE);
+		 text.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, size));
+		 text.setFill(Color.AZURE);
 
 		 text.setStroke(Color.LIGHTGOLDENRODYELLOW); 
 		return text;
@@ -184,31 +185,32 @@ public class Map {
 	
 	public static void arrowKeyListener()
 	{
+		
 		root.setOnKeyPressed(event -> {
 		
 		if (event.getCode() == KeyCode.UP)
 		{
 			player.moveUp();
-			redrawMap();
+			//redrawMap();
 		}
 		else if (event.getCode() == KeyCode.DOWN)
 		{
 			player.moveDown();
-			redrawMap();
+			//redrawMap();
 		}
 		else if (event.getCode() == KeyCode.LEFT)
 		{	
 			player.moveLeft();
-			redrawMap();
+			//redrawMap();
 		}
 		else if (event.getCode() == KeyCode.RIGHT)
 		{
 			player.moveRight();
-			redrawMap();
+			//redrawMap();
 		}
 		else if (event.getCode() == KeyCode.ESCAPE)
 		{
-			redrawMap();
+			gameOver();
 			//code to pause game
 		}
 		else if(event.getCode() == KeyCode.E)
@@ -217,35 +219,97 @@ public class Map {
 			redrawMap();
 			
 		}
-		  //event.consume();
-		redrawMap();
+		root.requestFocus();
+		event.consume();
+		//redrawMap();
 	});
 		
 	}
 	
 	public static void gameOver()
 	{
+
+		running = false;
+		root.getChildren().clear(); //removing all nodes from scene
 		
-		System.exit(1);
+
+		//creating the texts for the "GAME OVER" screen
+		score  = new Text();
+		highscore = new Text();
+		
+		//initGrid();
+
+		//adding a background image 
+		   final ImageView imageView = new ImageView(
+				      new Image("gameOver4.gif")
+				      );
+				    imageView.setFitHeight(Constants.screenHeight);
+				    imageView.setFitWidth(Constants.screenWidth);
+	  
+				    root.setStyle("-fx-background-color: rgba(0, 50, 50, 0.5); -fx-background-radius: 10;");
+				    root.setMaxWidth(imageView.getFitWidth() - 40);
+				   root.setMaxHeight(imageView.getFitHeight() - 40);
+		
+		//creating the text objects to be added to the pane		   
+		Text over = setText(new Location(Constants.gridHeight/2 ,Constants.gridWidth/2 -1.7), "GAME OVER",40 );
+		over.setFill(Color.RED);
+		score = setText(new Location(Constants.gridHeight/2 +2,Constants.gridWidth/2 - 5) ,"Score : "+ Integer.toString(player.getScore()),30);
+		highscore = setText(new Location(Constants.gridHeight/2 +2,Constants.gridWidth/2 + 2),"High Score : ",30); // + retrieveHighscore());
+		Text restart =  setText(new Location(Constants.gridHeight/2 +4,Constants.gridWidth/2 -3.5),"PRESS SPACEBAR TO RESTART  ",30); // + retrieveHighscore());
+		
+		
+		root.getChildren().addAll(imageView,score,highscore,over,restart);
+
+		//root.requestFocus();
+		
+		endGameListener();
+	}
+	public static void endGameListener()
+	{
+		if(running == false) {
+		root.setOnKeyPressed(event -> {
+		
+			//Restarting the Game
+		if (event.getCode() == KeyCode.SPACE)
+		{
+			running = true;
+			initGrid();
+		}
+		if (event.getCode() == KeyCode.ESCAPE)
+		{
+			System.exit(1);
+		}
+	});
+		}
 	}
 	
 public static void startTimeline(){
     	
 	//here we control the rate at which the ghost moves in miliseconds
+	if(running) {
     	timeLine = new Timeline(new KeyFrame(Duration.millis(200), event ->
     	{
     		redGhost.moveGhost();
-    		eeeeredrawMap();
+    		redrawMap();
     			}));
     	timeLine.setCycleCount(Timeline.INDEFINITE);
     	timeLine.play();
-    	
+	}
     }
 
+
+/**
+ * Initializes the grid to start values
+ * Also intializes PacMan and ghosts to their original locations
+ * invokes the arrowkey listener
+ */
 public static void initGrid()
 {
+	arrowKeyListener();
 	grid = new Grid();
 	
+	 player = new Pacman(startLocation);
+	 redGhost = new Ghost (ghostStartLocation);
     for (int i =0;i< Constants.gridHeight;i++){
     	
         for (int j =0;j< Constants.gridWidth;j++){

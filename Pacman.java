@@ -10,7 +10,6 @@ public class Pacman extends Character {
 	private static Node node;
 	private ImageView PacImage;
 	
-	
 //----constructors---------------------------------------------------
 	
 	public Pacman(Location toCopy) 
