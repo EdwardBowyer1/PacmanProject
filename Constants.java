@@ -21,6 +21,8 @@ public class Constants
 		public static int EMPTY = 0;
 		public static int OBSTACLE = 1;
 		public static int FOOD = 2;
+		
+		public static int highscore = 0;
 
 //		public static Color BORDR_COLOR = Color.BLUE;
 		public static Color OBSTACLE_COLOR = 	Color.YELLOW;

@@ -56,6 +56,12 @@ public class Map {
 		
 	}
 
+	/**
+	 * 
+	 * @param primaryStage Retrieves the Stage from FxGame file to add a pane and 
+	 * a scene to it.
+	 * @return Returns the stage ready to be shown.
+	 */
 	public  Stage generateMap (Stage primaryStage){ 
 		stage = primaryStage;
 		//loading pacman GIF from constants to imageView class
@@ -90,6 +96,10 @@ public class Map {
 	}
 	
 	
+	/**
+	 * Responsible for creating the layout of the of the obstacles 
+	 * in the GUI.
+	 */
 	public static void initializeObstacles()
 	{
 
@@ -109,6 +119,12 @@ public class Map {
 		
 		
 	}
+	/**
+	 * 
+	 * @param pObstacle: Location on the map of the potential obstacle
+	 * @return True if the location is matches the arraylist of obstacle locations
+	 * 		   False otherwise
+	 */
 	public static boolean isObstacle(Location pObstacle)
 	{
 		for(int i = 0; i<obstacles.size(); i++)
@@ -121,6 +137,12 @@ public class Map {
 	
 	
 	//-------------------------------------------------------------------------------------------------------------------------------------------*********************************************************
+	/**
+	 * Responsible for updating the map everytime an action occurs
+	 * such as food being consumed by pacman or if the ghost AI
+	 * moves the ghost.
+	 */
+	
 	public static  void redrawMap()
 	{
 
@@ -159,7 +181,7 @@ public class Map {
 			highscore = new Text();
 			
 			score = setText(scorePosition,"Score : "+ Integer.toString(player.getScore()),20);
-			highscore = setText(new Location(0.5,10),"High Score : ",20); // + retrieveHighscore());
+			highscore = setText(new Location(0.5,10),"High Score : " + player.getHighscore(),20); // + retrieveHighscore());
 			
 			root.getChildren().add(score);
 			root.getChildren().add(highscore);
@@ -168,6 +190,13 @@ public class Map {
 		}
 	}
 	
+	/**
+	 * 
+	 * @param scorePosition
+	 * @param textV
+	 * @param size
+	 * @return Sets the JavaFX node of Text to be added to the Pane.
+	 */
 	public static Text setText(Location scorePosition, String textV, int size )
 	{
 		Text text = new Text();
@@ -183,6 +212,11 @@ public class Map {
 		
 	}
 	
+	/**
+	 * Listener for Pacman's movement around the map.
+	 * Calls the move functions of Pacman to traverse
+	 * the map.
+	 */
 	public static void arrowKeyListener()
 	{
 		
@@ -191,27 +225,27 @@ public class Map {
 		if (event.getCode() == KeyCode.UP)
 		{
 			player.moveUp();
-			//redrawMap();
+			
 		}
 		else if (event.getCode() == KeyCode.DOWN)
 		{
 			player.moveDown();
-			//redrawMap();
+	
 		}
 		else if (event.getCode() == KeyCode.LEFT)
 		{	
 			player.moveLeft();
-			//redrawMap();
+
 		}
 		else if (event.getCode() == KeyCode.RIGHT)
 		{
 			player.moveRight();
-			//redrawMap();
+
 		}
 		else if (event.getCode() == KeyCode.ESCAPE)
 		{
 			gameOver();
-			//code to pause game
+			//code to end game
 		}
 		else if(event.getCode() == KeyCode.E)
 		{
@@ -219,6 +253,9 @@ public class Map {
 			redrawMap();
 			
 		}
+		
+		
+		
 		root.requestFocus();
 		event.consume();
 		//redrawMap();
@@ -226,13 +263,20 @@ public class Map {
 		
 	}
 	
+	/**
+	 * Function that is called when Pacman is caught, pauses all threads related
+	 * to ghost and redrawing of the map through boolean checker
+	 */
 	public static void gameOver()
 	{
 
 		running = false;
 		root.getChildren().clear(); //removing all nodes from scene
 		
-
+		//saving the highscore of pacman
+		player.saveHighscore(player.getHscore());
+		
+		
 		//creating the texts for the "GAME OVER" screen
 		score  = new Text();
 		highscore = new Text();
@@ -254,7 +298,7 @@ public class Map {
 		Text over = setText(new Location(Constants.gridHeight/2 ,Constants.gridWidth/2 -1.7), "GAME OVER",40 );
 		over.setFill(Color.RED);
 		score = setText(new Location(Constants.gridHeight/2 +2,Constants.gridWidth/2 - 5) ,"Score : "+ Integer.toString(player.getScore()),30);
-		highscore = setText(new Location(Constants.gridHeight/2 +2,Constants.gridWidth/2 + 2),"High Score : ",30); // + retrieveHighscore());
+		highscore = setText(new Location(Constants.gridHeight/2 +2,Constants.gridWidth/2 + 3),"High Score : " + Integer.toString(player.getHighscore()),30); // + retrieveHighscore());
 		Text restart =  setText(new Location(Constants.gridHeight/2 +4,Constants.gridWidth/2 -3.5),"PRESS SPACEBAR TO RESTART  ",30); // + retrieveHighscore());
 		
 		
@@ -264,6 +308,10 @@ public class Map {
 		
 		endGameListener();
 	}
+	/**
+	 * Allows the the option to restart or end the game when PacMan is killed
+	 * Through user input
+	 */
 	public static void endGameListener()
 	{
 		if(running == false) {
@@ -283,6 +331,9 @@ public class Map {
 		}
 	}
 	
+	/**
+	 * Begins the loop for the ghost to start moving periodically
+	 */
 public static void startTimeline(){
     	
 	//here we control the rate at which the ghost moves in miliseconds
