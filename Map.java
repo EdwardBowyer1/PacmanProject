@@ -78,6 +78,8 @@ public class Map {
 		
 		
 		// HERE IS WHERE THE INITIAL GRID POPULATING OCCURS and Pacman and the ghosts are initialized--------------------------------------------------------------------------------
+		 player = new Pacman(startLocation);
+		 redGhost = new Ghost (ghostStartLocation);
 		initGrid();
 		
 		
@@ -145,8 +147,6 @@ public class Map {
 	
 	public static  void redrawMap()
 	{
-
-		
 		
 		root.setStyle("-fx-background-color: black");
 		if(running) {
@@ -320,7 +320,10 @@ public class Map {
 			//Restarting the Game
 		if (event.getCode() == KeyCode.SPACE)
 		{
+			 player = new Pacman(startLocation);
+			 redGhost = new Ghost (ghostStartLocation);
 			running = true;
+			
 			initGrid();
 		}
 		if (event.getCode() == KeyCode.ESCAPE)
@@ -359,8 +362,9 @@ public static void initGrid()
 	arrowKeyListener();
 	grid = new Grid();
 	
-	 player = new Pacman(startLocation);
-	 redGhost = new Ghost (ghostStartLocation);
+//	 player.setCoordinate(coordinate);
+//	 redGhost = new Ghost (ghostStartLocation);
+
     for (int i =0;i< Constants.gridHeight;i++){
     	
         for (int j =0;j< Constants.gridWidth;j++){
