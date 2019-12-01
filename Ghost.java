@@ -5,10 +5,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.shape.Circle;
 
 public class Ghost extends Character {
-
-	
-
-
 	private Node node;
 	private  ImageView redGhostImage = new ImageView(Constants.GIFRedGhost);
 	
@@ -20,8 +16,7 @@ public class Ghost extends Character {
 	}
 
 	public void moveGhost(){
-
-
+		
 		double pacXlocation  = Map.player.getCoordinate().getYlocation(); //X and Y locations
 		double pacYlocation  = Map.player.getCoordinate().getXlocation(); //swapped the x and y location due to confusion of x,y being [i][j] notation
 		double ghostXlocation = getCoordinate().getYlocation();			// Ylocation represents width of grid "Traditional x axis"
@@ -119,7 +114,6 @@ public class Ghost extends Character {
 
 	public  boolean moveLeft(){
 
-
 		double ghostXlocation = getCoordinate().getYlocation();
 		double ghostYlocation = getCoordinate().getXlocation();
 		if (Map.grid.getCell(ghostYlocation,ghostXlocation-1).getType() == Constants.OBSTACLE)
@@ -151,7 +145,6 @@ public class Ghost extends Character {
 	}
 
 	public  Node getNode(){
-
 
 		double xpixel = getCoordinate().getPixelW(); //x location in pixels. (x * cell_width)
 		double ypixel= getCoordinate().getPixelH();
