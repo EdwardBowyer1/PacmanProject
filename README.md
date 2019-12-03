@@ -1,13 +1,23 @@
 # PacmanProject
 Cpsc 233 Pacman
 >>>>>>> master
-Running Demo 2/3(GUI version)
-To run PacMan GUI version, import all the files under the WorkingGUI branch in 
-in GIT into an eclipse project. Assuming javaFX is installed run the 
-file "FXgame.java". The GIF and the wall image must be under the same package, we used a default package.
+
+This repo contains PacMan in two different versions: Text and GUI. Both of them require JavaFX to be installed and working on your system.
+So please install Javafx before following the instructions below. Both versions have a score and highscore tracker. 
+
+
+
+Running GUI Version
+
+To run PacMan GUI version, import all the files under the main branch in GIT into an eclipse project. Assuming javaFX is installed run the 
+file "FXgame.java". All .GIF and .JPG files must be under the same package, we used a default package.
 This will begin the sequences and a GUI screen should appear.
-Move Pacman around with the arrow keys.
-If the screen is cut off, it is because the resolution GUI is created for a 1920 x 1080 monitor, your monitor
-resolution is printed in the console if you run the program. Edit the screenWidth to be the larger number printed in console
-and the screenHeight to be the smaller number in console to get the correct fit for your screen.
-=======
+Move Pacman around with the arrow keys and avoid the ghost, if you are caught you will have the option to restart
+
+
+
+Running Console Text Version
+
+To run the the text version, follow the same instructions as for the GUI version but run the file TextGame.java instead.
+
+
