@@ -5,6 +5,11 @@ import javafx.stage.Stage;
 
 
 /**JAVADOC: GUI version of PacMan */
+/**
+ * 
+ * @author Sami
+ *
+ */
 public class FxGame extends Application{
 	
 	public static void main(String[] args) {
@@ -23,7 +28,7 @@ public class FxGame extends Application{
        
        map.generateMap(primaryStage).show();
        
-	 map.startTimeline();
+       map.startTimeline();
 
 
         

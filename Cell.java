@@ -3,9 +3,17 @@ import javafx.scene.image.ImageView;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 
+/**
+ * This class keeps track of the GUI Node and the type of the cell, it's superclass GamObject keeps track 
+ * of the Location.
+ * @author Zeke and Sami
+ *
+ */
 public class Cell extends GameObject
 {
-	
+	/**
+	 * Instance variables
+	 */
 	private int type; //identifies type of the cell (Obstacle/Wall, Food, and an empty Cell)
 	private Node node; //Needed to actually put on the pane for GUI	
 	
@@ -17,7 +25,10 @@ public class Cell extends GameObject
 	}
 
 		
-//----Setters--------------------------------------------------------	
+/**
+ * ----Setters--------------------------------------------------------	
+ * @param node
+ */
 	public void setNode(Node node) 
 	{
 		this.node = node;
@@ -29,14 +40,19 @@ public class Cell extends GameObject
 	}
 
 
-//----Getters-------------------------------------------------------
+/**
+ * ----Getters-------------------------------------------------------
+ * @return typer of cell 
+ */
 	public int getType() 
 	{			
 		return type;
 	}
 	
 	
-//This is what is called to draw the cell
+/**
+ * @return Returns the node that will be added into the GUI, based on the type of the cell
+ */
 	public Node getNode() 
 	{
 		double xlocation = getCoordinate().getPixelW(); //x location in pixels. (x * cell_width)
@@ -59,8 +75,7 @@ public class Cell extends GameObject
 		
 		else if(type == Constants.FOOD) //if type is food
 		{
-			//draws a circle 
-			//this.node = new Circle(xlocation + Constants.cellWidth/2, ylocation + Constants.cellHeight/2 - Constants.cellWidth/8, 0, null);
+	
 			this.node = new Circle();
 			
 			((Circle)node).setFill(Constants.FOOD_COLOUR);  	//Color of dot/food is white
@@ -77,7 +92,9 @@ public class Cell extends GameObject
 		
 		return node;
 	}
-	
+	/**
+	 * Returns the type of the cell
+	 */
 	public String toString()
 	{
 		return "Type: " + this.type;

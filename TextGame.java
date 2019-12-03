@@ -5,9 +5,16 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 
 /**JAVADOC: Text based version of PacMan */
+/**
+ * 
+ * @author Sami and Edward
+ *
+ */
 public class TextGame extends Application
 {
-	//Instance variables-------------------------------------------
+	/**
+	 * Instance variables-------------------------------------------
+	 */
 	public static boolean isRunning;
 	static int initIM = 1;
 	static int initJM = 1;
@@ -18,7 +25,10 @@ public class TextGame extends Application
 
 	}
 	
-	//Instance methods-------------------------------------------
+	/**
+	 * Getters/setters-------------------------------------------
+	 * @param a 
+	 */
 	public void setIsRunning(boolean a)
 	{
 		isRunning = a;
@@ -27,7 +37,11 @@ public class TextGame extends Application
 	{
 		return isRunning;
 	}
-		@Override
+	/**
+	 * This function calls the regular start up method of the game but is not shown on the screen,
+	 * then the already made objects are utilized to be printed instead onto the console
+	 * @Override
+	 */
 	public void start(Stage arg0) throws Exception 
 	{
 			// TODO Auto-generated method stub

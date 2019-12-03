@@ -23,12 +23,15 @@ import javafx.util.Duration;
 import junit.framework.Test;
 
 /**
+ * This class is implemented to statically keep track of the GUI, but contains instance of all the other classes implemented.
  * @author Sami
  *
  */
 public class Map {
 	
-	//Instance variables-------------------------------------------
+	/**
+	 * Instance variables----------------------------------------------------------------------------------------
+	 */
 	public static boolean running =true;
 	
 	//intital starting point of pacman, matrix notation
@@ -160,7 +163,6 @@ public class Map {
 		{
 			//should be resetting the map
 			initGrid();
-			grid.toConsole();
 			foodCount = originalFoodCount;
 		}
 
@@ -259,7 +261,7 @@ public class Map {
 	}
 	
 	/**
-	 * Function that is called when Pacman is caught, pauses all threads related
+	 * Function that is called when Pacman is caught, stops all threads related
 	 * to ghost and redrawing of the map through boolean checker
 	 */
 	public static void gameOver()
@@ -276,7 +278,6 @@ public class Map {
 		score  = new Text();
 		highscore = new Text();
 		
-		//initGrid();
 
 		//adding a background image 
 		   final ImageView imageView = new ImageView(
@@ -356,9 +357,6 @@ public static void initGrid()
 {
 	arrowKeyListener();
 	grid = new Grid();
-	
-//	 player.setCoordinate(coordinate);
-//	 redGhost = new Ghost (ghostStartLocation);
 
     for (int i =0;i< Constants.gridHeight;i++){
     	
@@ -396,7 +394,10 @@ public static void initGrid()
 }
 
 			
-	//-----Getters-------------------------------	
+	/**
+	 * -----Getters-------------------------------	
+	 * @return
+	 */
 		
 		public Pacman getPlayer() 
 		{
@@ -404,8 +405,6 @@ public static void initGrid()
 		}
 			
 			
-			
-	//-----Setters-------------------------------
-
+		
 
 }

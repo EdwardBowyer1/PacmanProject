@@ -3,6 +3,11 @@ import javafx.scene.image.*;
 import javafx.scene.paint.*;
 import javafx.stage.Screen;
 
+/**
+ * This class contains the static variables that are not required to be instantiated in each object
+ * @author Sami, Zeke, Medhanie and Edward
+ *
+ */
 public class Constants
 {
 		//grid width and height. 

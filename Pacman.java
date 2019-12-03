@@ -7,16 +7,24 @@ import java.io.IOException;
 import javafx.scene.Node;
 import javafx.scene.image.ImageView;
 
+/**
+ *  THis class keeps manages its own location and returns its representation through it's node.
+ * @author Zeke and Sami
+ *
+ */
 public class Pacman extends Character {
-//	private int xlocation  = getCoordinate().getXlocation(); //X and Y locations 
-//	private int ylocation  = getCoordinate().getYlocation();
-	
-	
+
+	/**
+	 * Instance variables
+	 */
 	private static int score, highscore;
 	private static Node node;
 	private ImageView PacImage;
 	private String Hscore = "Highscore.bin";	
-//----constructors---------------------------------------------------
+/**
+ * ----constructors---------------------------------------------------
+ * @param toCopy, sets the location.
+ */
 	
 	public Pacman(Location toCopy) 
 	{
@@ -32,7 +40,9 @@ public class Pacman extends Character {
 
 //----Methods----------------------------------------------------------------
 
-
+	/**
+	 * Decrements the the row location (i in matrix notation)
+	 */
 	public boolean moveUp()
 	{
 		double xlocation  = getCoordinate().getXlocation(); //X and Y locations 
@@ -60,6 +70,9 @@ public class Pacman extends Character {
 	
 	}
 	
+	/**
+	 * Increments the the row location (i in matrix notation)
+	 */
 	public boolean moveDown()
 	{
 		double xlocation  = getCoordinate().getXlocation(); //X and Y locations 
@@ -88,6 +101,9 @@ public class Pacman extends Character {
 
 	}
 	
+	/**
+	 * Decrements the the column location (j in matrix notation)
+	 */
 	public boolean moveLeft()
 	{
 		
@@ -117,7 +133,9 @@ public class Pacman extends Character {
     	return true;
 	}
 	
-
+	/**
+	 * Increments the the column location (j in matrix notation)
+	 */
 	public boolean moveRight() 
 	{
 		double xlocation  = getCoordinate().getXlocation(); //X and Y locations 
@@ -146,7 +164,10 @@ public class Pacman extends Character {
 
     	return true;
 	}
-	
+	/**
+	 * 
+	 * @return : returns the node that is required to visually depict the ghost in the GUI.
+	 */
 	public Node getNode()
 	{
 		double xpixel = getCoordinate().getPixelW(); //x location in pixels. (x * cell_width)
@@ -168,6 +189,10 @@ public class Pacman extends Character {
 	
 }
 
+	/**
+	 * Loads the highscore from a file into the application which is then 
+	 * @param filename Name of the file with the highscore
+	 */
 	public static void loadHighscore(String filename)
 	{
 		try
@@ -179,13 +204,17 @@ public class Pacman extends Character {
 		}
 		catch(IOException ioe)
 		{
-			System.out.println("No previous highscores found");
+			System.out.println("Error, no previous highscores found");
 			highscore = score;
-			System.out.println(highscore);
 			
 		}
 	}
 	
+	/**
+	 * Saves the highscore into a file with the provided name. Must be .bin.
+	 * If the file exists then it is overwritten.
+	 * @param filename
+	 */
 	public static void saveHighscore(String filename)
 	{
 		try 
@@ -198,7 +227,10 @@ public class Pacman extends Character {
 		}
 	}
 	
-	// Getters/setters
+	/**
+	 *  Getters/setters-------------------------------------------------------------------------
+	 * @return
+	 */
 
 	public int getScore() {
 		return score;

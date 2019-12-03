@@ -4,11 +4,16 @@ import javafx.scene.Node;
 import javafx.scene.image.ImageView;
 import javafx.scene.shape.Circle;
 
+/**
+ * THis class keeps manages its own location and returns its representation through it's node.
+ * @author Medhanie and Sami
+ *
+ */
 public class Ghost extends Character {
 
 	
 
-
+	//instance variables
 	private Node node;
 	private  ImageView redGhostImage = new ImageView(Constants.GIFRedGhost);
 	
@@ -19,6 +24,10 @@ public class Ghost extends Character {
 
 	}
 
+	/**
+	 * This function is called whenever the ghost is equired to change location on the map,
+	 * It calls one of four move functions based on what the AI decides, (smart random probability)
+	 */
 	public void moveGhost(){
 
 
@@ -85,7 +94,9 @@ public class Ghost extends Character {
 
 
 	}
-
+/**
+ * Decrements the the row location (i in matrix notation)
+ */
 	public  boolean moveUp(){
 
 		double ghostXlocation = getCoordinate().getYlocation();
@@ -99,7 +110,9 @@ public class Ghost extends Character {
     	return true;
 
 	}
-
+	/**
+	 * Increments the the row location (i in matrix notation)
+	 */
 	public  boolean moveDown(){
 
 		double ghostXlocation = getCoordinate().getYlocation();
@@ -109,12 +122,14 @@ public class Ghost extends Character {
 
 		Location temp = new Location(ghostYlocation+1, ghostXlocation);
 		super.setCoordinate(temp);
-    	//Map.redrawMap();
-
+   
     	return true;
 
 	}
 
+	/**
+	 * Decrements the the column location (j in matrix notation)
+	 */
 	public  boolean moveLeft(){
 
 
@@ -125,13 +140,14 @@ public class Ghost extends Character {
 
 		Location temp = new Location(ghostYlocation, ghostXlocation-1);
 		super.setCoordinate(temp);
-		//Map.redrawMap();
 
     	return true;
 
 
 	}
-
+	/**
+	 * Increments the the column location (j in matrix notation)
+	 */
 	public  boolean moveRight(){
 
 		double ghostXlocation = getCoordinate().getYlocation();
@@ -142,16 +158,19 @@ public class Ghost extends Character {
 
 		Location temp = new Location(ghostYlocation, ghostXlocation+1);
 		super.setCoordinate(temp);
-		//Map.redrawMap();
-
+	
     	return true;
 
 	}
+	/**
+	 * 
+	 * @return : returns the node that is required to visually depict the ghost in the GUI.
+	 */
 
 	public  Node getNode(){
 
 
-		double xpixel = getCoordinate().getPixelW(); //x location in pixels. (x * cell_width)
+		double xpixel = getCoordinate().getPixelW();
 		double ypixel= getCoordinate().getPixelH();
 
 		double min = Constants.cellHeight;

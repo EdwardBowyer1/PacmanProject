@@ -1,14 +1,28 @@
 
+/**
+ * This is the class that creates a grid based on the value in the Constants class. 
+ * It's a 2D array of cells which is how the map retains it;s values and dynamically changes.
+ * @author Zeke and Sami
+ *
+ */
 public class Grid {
 	
+	/**
+	 * instance variables
+	 */
 	private  Cell [] [] grid;
 	
+	/**
+	 * Constructors
+	 * @param toCopy
+	 */
 	public Grid(){
 		
 		grid = new Cell [Constants.gridHeight] [Constants.gridWidth];
 		
 	}
 	
+
 	public Grid(Grid toCopy)
 	{
 		this();
@@ -22,8 +36,11 @@ public class Grid {
 		
 		}
 	}
-	
-	public void addCell(Cell cell){ //we need to make copies of the cell because encapsulation
+	/**
+	 * Getters and setters
+	 * @param cell
+	 */
+	public void addCell(Cell cell){ 
 		
 		grid [(int)cell.getCoordinate().getXlocation()][(int)cell.getCoordinate().getYlocation()] = cell;
 		
@@ -35,7 +52,10 @@ public class Grid {
 		
 	}
 	
-	public void toConsole() //for debugging
+	/**
+	 * Prints the current grid types encoded into suitable characters on the console.
+	 */
+	public void toConsole() 
 	{
 		
 		for(int i = 0; i< grid.length; i++)
@@ -56,7 +76,7 @@ public class Grid {
 		        		System.out.print('.');
 		        	else 
 		        		System.out.print(' ');
-					//System.out.print(grid[i][j].getType());
+		
 				}
 			}
 			System.out.println();
@@ -64,6 +84,12 @@ public class Grid {
 		System.out.println();
 	}
 	
+	/**
+	 * Returns true if the cell at (i,j) is empty.
+	 * @param i
+	 * @param j
+	 * @return
+	 */
 	public boolean isEmpty(int i, int j)
 	{
 		if(grid[i][j].getType() == Constants.EMPTY)

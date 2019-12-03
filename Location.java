@@ -1,27 +1,39 @@
 import javafx.geometry.Rectangle2D;
 import javafx.stage.Screen;
-
+/**
+ * 
+ * @author Sami and Zeke
+ *
+ */
 public class Location {
 	//instance variables
-	//grid cell count horizontally/vertically
+	/**
+	 * grid cell count horizontally/vertically
+	 */
 	private double xlocation; // i in matrix notation  ******************************************!!
-	private double ylocation; // j in matrix notation	******************************************!!
+	private double ylocation; // j in matrix notation	*****************************************!!
 	
 	
-	private double pixelW; //why do we need this? Cant we just refer to constant class ANS-> Because its the how many pixels from (0,0) to this location, its a multiple of cell pixels dimensions 
+	private double pixelW;
 	private double pixelH;
 	
 	public static int tracker = 0;
 
 
 	
-	//constructors
+	/**
+	 * constructors
+	 */
 	public Location()
 	{
 		setXlocation(0);
 		setYlocation(0);
 	}
-	//receives an x and y location of the grid, not in pixel form
+	/**
+	 * receives an x and y location of the grid, not in pixel form
+	 * @param xlocation
+	 * @param ylocation
+	 */
 	public Location(double xlocation, double ylocation) 
 	{
 		setXlocation(xlocation);
@@ -32,8 +44,11 @@ public class Location {
 		this(old.xlocation,old.ylocation);
 	}
 	
-	//Methods
-	
+	/**
+	 * 
+	 * @param old-> Location to be compared current location variable
+	 * @return true if equal, false otherwise
+	 */
 	public boolean isEqual(Location old) 
 	{
 		if(old.xlocation == xlocation && old.ylocation == ylocation)
@@ -42,6 +57,11 @@ public class Location {
 			return false;
 	}
 		
+	/**
+	 * 
+	 * @param xChange increments/decrements the row of the location 
+	 * @param yChange increments/decrements the column of the location 
+	 */
 	protected void changeLocation(int xChange, int yChange) //consider changing to protected instead
 		{
 			setXlocation(xlocation + xChange);
@@ -55,7 +75,10 @@ public class Location {
 	{
 		return "Coordinate: (" + xlocation + ", " + ylocation + ")";
 	}
-	//getters and setters
+	/**
+	 * getters and setters----------------------------------------------------------------------------------------
+	 * @return
+	 */
 	public double getXlocation() {
 		return xlocation;
 	}
