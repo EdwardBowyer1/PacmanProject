@@ -24,14 +24,10 @@ public class Constants
 		
 		public static int highscore = 0;
 
-//		public static Color BORDR_COLOR = Color.BLUE;
 		public static Color OBSTACLE_COLOR = 	Color.YELLOW;
 		public static Color EMPTY_COLOUR = 	Color.BLACK;
 		public static Color FOOD_COLOUR = 	Color.WHITE; 
-//		public static Color PACMAN_COLOR = 	Color.YELLOW;
-		//public static Color GHOST1_COLOR = 	Color.GREEN;
-		//public static Color GAMEOVER_RECTANGLE_COLOR = 	Color.DARKGRAY;
-		//public static Color GAMEOVER_RECTANGLE_STROKE_COLOR = 	Color.RED;
+
 
 		public static Image GIFRedGhost = new Image("redGhost.gif");
 		public static Image GIFPacRight = new Image("pacmanRight.gif"); 

@@ -33,25 +33,8 @@ public class Location {
 	}
 	
 	//Methods
-	/**
-	 * This function displays the monitor screen width and height in pixels printed to console
-	 */
-	public static void initScreenDimensions()
-	{
-		
-        Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
-//        Constants.screenWidth = primaryScreenBounds.getWidth();
-//        Constants.screenHeight = primaryScreenBounds.getHeight();
-        
-        //limiting the printouts to console
-        if(tracker==0)
-         System.out.println("screenWidth: " +Constants.screenWidth + " screenHeight: " + Constants.screenHeight + " \n" + primaryScreenBounds.toString());
-        
-        tracker++;
-	}
 	
-	
-	public boolean isEqual(Location old) //
+	public boolean isEqual(Location old) 
 	{
 		if(old.xlocation == xlocation && old.ylocation == ylocation)
 			return true;

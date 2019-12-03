@@ -12,12 +12,15 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.*;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import junit.framework.Test;
 
 /**
  * @author Sami
@@ -28,6 +31,11 @@ public class Map {
 	//Instance variables-------------------------------------------
 	public static boolean running =true;
 	
+	//intital starting point of pacman, matrix notation
+	static int initIM = 1;
+	static int initJM = 1;
+	
+	//javafx variables
 	protected static Pane root;
 	public static Grid grid;
 	public static Timeline timeLine;
@@ -35,26 +43,22 @@ public class Map {
 	public static Stage stage;
 	public static Text score, highscore;
 
+	//food 
 	public static int foodCount = 0;
 	public static int originalFoodCount;
 	
-	//intital starting point of pacman, matrix notation
-	static int initIM = 1;
-	static int initJM = 1;
-	
+
+	//initial locations
 	private static Location startLocation = new Location(initIM, initJM);
 	private static Location ghostStartLocation = new Location(Constants.gridHeight-2,Constants.gridHeight-2);
 	private static Location scorePosition = new Location(0.5,0.2);
 
+	//Character initializations
 	public static Pacman player = new Pacman(startLocation);
 	public static Ghost redGhost = new Ghost (ghostStartLocation);
+	
+	//list of obstacles
 	public static ArrayList<Location> obstacles = new ArrayList<>();
-
-	//Constructors-------------------------------------------------
-	public Map()
-	{
-		
-	}
 
 	/**
 	 * 
@@ -64,8 +68,7 @@ public class Map {
 	 */
 	public  Stage generateMap (Stage primaryStage){ 
 		stage = primaryStage;
-		//loading pacman GIF from constants to imageView class
-	
+
 		root = new Pane(); 
 		root.setStyle("-fx-background-color: black");
 
@@ -74,7 +77,7 @@ public class Map {
 		
 		initializeObstacles();
 		
-		stage.setTitle("Pacman Demo2");
+		stage.setTitle("Pacman");
 		
 		
 		// HERE IS WHERE THE INITIAL GRID POPULATING OCCURS and Pacman and the ghosts are initialized--------------------------------------------------------------------------------
@@ -89,14 +92,13 @@ public class Map {
 		Scene scene = new Scene(root,ScreenW,ScreenH);
 	    stage.setScene(scene);
 
-	   
 		return stage;
 	
 
 		
 		
 	}
-	
+
 	
 	/**
 	 * Responsible for creating the layout of the of the obstacles 
@@ -153,7 +155,7 @@ public class Map {
 			root.setStyle("-fx-background-color: black");
 		root.getChildren().clear();
 		
-		//redrawwing the map from the grid and checking to see if the food is finished
+		//redrawing the map from the grid and checking to see if the food is finished
 		if(foodCount==0)
 		{
 			//should be resetting the map
@@ -202,7 +204,6 @@ public class Map {
 		Text text = new Text();
 		 text.setY(scorePosition.getPixelH());
 		 text.setX(scorePosition.getPixelW());
-		 //System.out.print(scorePosition.getPixelW() +  "height:"+scorePosition.getPixelH() +"here" );
 		 text.setText(textV);
 		 text.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, size));
 		 text.setFill(Color.AZURE);
@@ -253,12 +254,6 @@ public class Map {
 			redrawMap();
 			
 		}
-		
-		
-		
-		root.requestFocus();
-		event.consume();
-		//redrawMap();
 	});
 		
 	}
@@ -285,7 +280,7 @@ public class Map {
 
 		//adding a background image 
 		   final ImageView imageView = new ImageView(
-				      new Image("gameOver4.gif")
+				      new Image("GameOver.jpg")
 				      );
 				    imageView.setFitHeight(Constants.screenHeight);
 				    imageView.setFitWidth(Constants.screenWidth);
@@ -294,7 +289,8 @@ public class Map {
 				    root.setMaxWidth(imageView.getFitWidth() - 40);
 				   root.setMaxHeight(imageView.getFitHeight() - 40);
 		
-		//creating the text objects to be added to the pane		   
+				   
+		//creating the Text objects to be added to the pane		   
 		Text over = setText(new Location(Constants.gridHeight/2 ,Constants.gridWidth/2 -1.7), "GAME OVER",40 );
 		over.setFill(Color.RED);
 		score = setText(new Location(Constants.gridHeight/2 +2,Constants.gridWidth/2 - 5) ,"Score : "+ Integer.toString(player.getScore()),30);
@@ -304,7 +300,6 @@ public class Map {
 		
 		root.getChildren().addAll(imageView,score,highscore,over,restart);
 
-		//root.requestFocus();
 		
 		endGameListener();
 	}
@@ -353,9 +348,9 @@ public static void startTimeline(){
 
 
 /**
- * Initializes the grid to start values
- * Also intializes PacMan and ghosts to their original locations
- * invokes the arrowkey listener
+ * Initializes the grid to start values,
+ * Also intializes PacMan and ghosts to their original locations,
+ * Invokes the arrowkey listener
  */
 public static void initGrid()
 {
@@ -388,7 +383,6 @@ public static void initGrid()
         		
         		
         	}
-        	System.out.print(type);
 
         	Cell cell = new Cell(cellLocation,type);
         	grid.addCell(cell);
@@ -396,7 +390,7 @@ public static void initGrid()
         	
             root.getChildren().add(cell.getNode());
         }
-    	System.out.println();
+
     }
     
 }

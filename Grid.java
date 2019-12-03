@@ -37,13 +37,30 @@ public class Grid {
 	
 	public void toConsole() //for debugging
 	{
-		for(int i = 0; i< grid.length-1; i++)
+		
+		for(int i = 0; i< grid.length; i++)
 		{
-			for(int j= 0; j<grid[0].length-1; j++)
-				System.out.print(grid[i][j].getType());
-		System.out.println();
+			System.out.print("           ");
+			for(int j= 0; j<grid[0].length; j++)
+			{
+				int type = grid[i][j].getType();
+				
+				if(Map.player.getCoordinate().getXlocation() == i && Map.player.getCoordinate().getYlocation()== j)
+					System.out.print('C');
+				else if(Map.redGhost.getCoordinate().getXlocation() == i && Map.redGhost.getCoordinate().getYlocation()== j)
+					System.out.print('X');
+				else {
+				 	if(type == 1) 
+		        		System.out.print('#');
+		        	else if(type == 2)
+		        		System.out.print('.');
+		        	else 
+		        		System.out.print(' ');
+					//System.out.print(grid[i][j].getType());
+				}
+			}
+			System.out.println();
 		}
-		System.out.println();
 		System.out.println();
 	}
 	

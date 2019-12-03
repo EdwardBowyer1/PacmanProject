@@ -7,9 +7,7 @@ public class Cell extends GameObject
 {
 	
 	private int type; //identifies type of the cell (Obstacle/Wall, Food, and an empty Cell)
-	private Node node; //Needed to actually put on the pane for GUI
-	//private Location location; //this fixes the location issue
-	
+	private Node node; //Needed to actually put on the pane for GUI	
 	
 //----Constructor---------------------------------------------------
 	public Cell(Location location, int type) 
@@ -84,10 +82,5 @@ public class Cell extends GameObject
 	{
 		return "Type: " + this.type;
 	}
-
-
-
-	
-
 
 }

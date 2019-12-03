@@ -1,10 +1,23 @@
 //Imports-------------------------------------------
 import java.util.*;
+
+import javafx.application.Application;
+import javafx.stage.Stage;
+
 /**JAVADOC: Text based version of PacMan */
-public class TextGame
+public class TextGame extends Application
 {
 	//Instance variables-------------------------------------------
-	private boolean isRunning;
+	public static boolean isRunning;
+	static int initIM = 1;
+	static int initJM = 1;
+	
+	public static void main(String[] args) {
+		
+		Application.launch(args);
+
+	}
+	
 	//Instance methods-------------------------------------------
 	public void setIsRunning(boolean a)
 	{
@@ -14,30 +27,77 @@ public class TextGame
 	{
 		return isRunning;
 	}
-
-	public static void main (String[] args)
+		@Override
+	public void start(Stage arg0) throws Exception 
 	{
+			// TODO Auto-generated method stub
+			
+		
 	//Game starts here-------------------------------------------
-	TextGame myapp = new TextGame();
 	Scanner playerInput = new Scanner (System.in);
-	TextMap m1 = new TextMap();
+	Map map = new Map();
 
-	myapp.isRunning = true;
+	map.generateMap(arg0);
 
-	while(myapp.isRunning)
+	isRunning = true;
+	System.out.println("Welcome to text game version of Pacman!");
+	System.out.println("Control Pacman 'C' and avoid the ghost 'X'.");
+	System.out.println("Enter 'w' 'a' 's' 'd' keys to move Pacman around!");
+	System.out.println("Or enter 'p' to exit the game");
+	System.out.println("Collect the dots to increase your score!");
+	System.out.println("                                     ");
+	System.out.println("               PACMAN                  ");
+	System.out.println("Score: " + Map.player.getScore() + "       		  Highscore: " + Map.player.getHighscore());
+	map.grid.toConsole();
+	
+	Map.running = true;
+	
+	while(Map.running)
 	{
-		m1.printMap();
-		System.out.println(m1.getPlayer().toString());
+		
 		char input = playerInput.next().charAt(0); 
 		//System.out.print("\033[H\033[2J"); <- For linux screen refresh
 		
-		if (input != 'a' && input != 's' &&  input != 'd' && input != 'w')
-		continue;
 		
-		if (m1.canMoveCharacter(input))
-			{
-				m1.getPlayer().Move(input);
+		if (input != 'a' && input != 's' &&  input != 'd' && input != 'w' && input != 'e')
+		continue;
+	
+		map.redGhost.moveGhost();
+		
+		if(input=='a')
+			map.player.moveLeft();
+		else if(input == 's')
+			map.player.moveDown();
+		else if(input == 'd')
+			map.player.moveRight();
+		else if(input == 'w')
+			map.player.moveUp();
+		else if(input == 'e')
+			System.exit(1);
+		
+		System.out.println("               PACMAN                  ");
+		System.out.println("Score: " + Map.player.getScore() + "        	  Highscore: " + Map.player.getHighscore());
+		map.grid.toConsole();
 			}
+	
+	System.out.println("                                     ");
+	System.out.println("                                     ");
+	System.out.println("                                     ");
+	System.out.println("                                     ");
+	System.out.println("                                     ");
+	System.out.println("                                     ");
+	System.out.println("               GAME OVER                  ");
+	System.out.println("Score: " + Map.player.getScore() + "          		Highscore: " + Map.player.getHighscore());
+	System.out.println("Enter 'e' to exit");
+	System.out.println("                                     ");
+	System.out.println("                                     ");
+	System.out.println("                                     ");
+	System.out.println("                                     ");
+	System.out.println("                                     ");
+	System.out.println("                                     ");
+	
+	char input = playerInput.next().charAt(0); 
+	if(input == 'e' || input == 'E')
+		System.exit(1);
+		}
 	}
-}
-}

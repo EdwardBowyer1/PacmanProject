@@ -42,9 +42,6 @@ public class Pacman extends Character {
 		if (Map.grid.getCell(xlocation-1, ylocation).getType() == Constants.OBSTACLE)
 			return false;
 		
-		//Constants.PACMAN_IMAGE.setRotate();
-	
-		
 		//Changes location of Pacman (moves him up by one)
 		Location temp = new Location(xlocation-1, ylocation);
 		super.setCoordinate(temp);
