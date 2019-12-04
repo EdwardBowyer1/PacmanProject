@@ -9,7 +9,6 @@ import javafx.embed.swing.JFXPanel;
 
 
 
-
 public class GhostTest {
 
     @Test
