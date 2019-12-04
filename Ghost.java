@@ -16,12 +16,14 @@ public class Ghost extends Character {
 	//instance variables
 	private Node node;
 	private  ImageView redGhostImage = new ImageView(Constants.GIFRedGhost);
+	private  ImageView blueGhostImage = new ImageView(Constants.GIFBlueGhost);
+
 	
 	// constructor
 
 	public Ghost(Location toCopy) {
 		super(toCopy);
-
+		
 	}
 
 	/**
@@ -189,4 +191,25 @@ public class Ghost extends Character {
 
 	}
 
+	public  Node getNodeB(){
+
+
+		double xpixel = getCoordinate().getPixelW();
+		double ypixel= getCoordinate().getPixelH();
+
+		double min = Constants.cellHeight;
+		if (Constants.cellWidth < Constants.cellHeight)
+			min = Constants.cellWidth;
+
+		blueGhostImage.setFitWidth(min);
+		blueGhostImage.setFitHeight(min);
+
+		blueGhostImage.setX(xpixel);	
+		blueGhostImage.setY(ypixel);
+
+		node = blueGhostImage;
+
+	return node;
+
+	}
 }

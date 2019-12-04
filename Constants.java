@@ -37,7 +37,7 @@ public class Constants
 		public static Image GIFRedGhost = new Image("redGhost.gif");
 		public static Image GIFPacRight = new Image("pacmanRight.gif"); 
 		public static Image Wall = new Image("wall.png");
-
+		public static Image GIFBlueGhost = new Image("blueGhost.gif");
 	
 		
 

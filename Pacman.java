@@ -20,6 +20,7 @@ public class Pacman extends Character {
 	private static int score, highscore;
 	private static Node node;
 	private ImageView PacImage;
+	//name of the BINARY file to read and save the highscore 
 	private String Hscore = "Highscore.bin";	
 /**
  * ----constructors---------------------------------------------------

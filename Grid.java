@@ -65,7 +65,9 @@ public class Grid {
 			{
 				int type = grid[i][j].getType();
 				
-				if(Map.player.getCoordinate().getXlocation() == i && Map.player.getCoordinate().getYlocation()== j)
+				if(Map.blueGhost.getCoordinate().getXlocation() == i && Map.blueGhost.getCoordinate().getYlocation()== j)
+					System.out.print('X');
+				else if(Map.player.getCoordinate().getXlocation() == i && Map.player.getCoordinate().getYlocation()== j)
 					System.out.print('C');
 				else if(Map.redGhost.getCoordinate().getXlocation() == i && Map.redGhost.getCoordinate().getYlocation()== j)
 					System.out.print('X');
@@ -74,7 +76,7 @@ public class Grid {
 		        		System.out.print('#');
 		        	else if(type == 2)
 		        		System.out.print('.');
-		        	else 
+		        	else if(type == 0)
 		        		System.out.print(' ');
 		
 				}

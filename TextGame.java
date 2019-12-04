@@ -42,7 +42,7 @@ public class TextGame extends Application
 	 * then the already made objects are utilized to be printed instead onto the console
 	 * @Override
 	 */
-	public void start(Stage arg0) throws Exception 
+	public void start(Stage stage) throws Exception 
 	{
 			// TODO Auto-generated method stub
 			
@@ -51,7 +51,7 @@ public class TextGame extends Application
 	Scanner playerInput = new Scanner (System.in);
 	Map map = new Map();
 
-	map.generateMap(arg0);
+	map.generateMap(stage);
 
 	isRunning = true;
 	System.out.println("Welcome to text game version of Pacman!");
@@ -77,6 +77,7 @@ public class TextGame extends Application
 		continue;
 	
 		map.redGhost.moveGhost();
+		map.blueGhost.moveGhost();
 		
 		if(input=='a')
 			map.player.moveLeft();

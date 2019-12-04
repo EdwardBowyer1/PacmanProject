@@ -53,12 +53,14 @@ public class Map {
 
 	//initial locations
 	private static Location startLocation = new Location(initIM, initJM);
-	private static Location ghostStartLocation = new Location(Constants.gridHeight-2,Constants.gridHeight-2);
+	private static Location REDghostStartLocation = new Location(Constants.gridHeight-2,Constants.gridHeight-2);
+	private static Location BLUEghostStartLocation = new Location(Constants.gridHeight-2,1);
 	private static Location scorePosition = new Location(0.5,0.2);
 
 	//Character initializations
 	public static Pacman player = new Pacman(startLocation);
-	public static Ghost redGhost = new Ghost (ghostStartLocation);
+	public static Ghost redGhost = new Ghost (REDghostStartLocation);
+	public static Ghost blueGhost = new Ghost(BLUEghostStartLocation);
 	
 	//list of obstacles
 	public static ArrayList<Location> obstacles = new ArrayList<>();
@@ -84,8 +86,9 @@ public class Map {
 		
 		
 		// HERE IS WHERE THE INITIAL GRID POPULATING OCCURS and Pacman and the ghosts are initialized--------------------------------------------------------------------------------
-		 player = new Pacman(startLocation);
-		 redGhost = new Ghost (ghostStartLocation);
+//		 player = new Pacman(startLocation);
+//		 redGhost = new Ghost (REDghostStartLocation);
+//		 
 		initGrid();
 		
 		
@@ -180,6 +183,7 @@ public class Map {
 		
 			root.getChildren().add(redGhost.getNode());
 		
+			root.getChildren().add(blueGhost.getNodeB());
 			
 			score  = new Text();
 			highscore = new Text();
@@ -256,6 +260,8 @@ public class Map {
 			redrawMap();
 			
 		}
+		root.requestFocus();
+		event.consume();
 	});
 		
 	}
@@ -317,7 +323,9 @@ public class Map {
 		if (event.getCode() == KeyCode.SPACE)
 		{
 			 player = new Pacman(startLocation);
-			 redGhost = new Ghost (ghostStartLocation);
+			 redGhost = new Ghost (REDghostStartLocation);
+			 blueGhost = new Ghost (BLUEghostStartLocation);
+
 			running = true;
 			
 			initGrid();
@@ -339,6 +347,7 @@ public static void startTimeline(){
 	if(running) {
     	timeLine = new Timeline(new KeyFrame(Duration.millis(200), event ->
     	{
+    		blueGhost.moveGhost();
     		redGhost.moveGhost();
     		redrawMap();
     			}));
