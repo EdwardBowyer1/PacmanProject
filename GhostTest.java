@@ -40,7 +40,7 @@ public class GhostTest {
 
         Location ghostlocation = new Location(8,8);
         Ghost ghost = new Ghost(ghostlocation);
-        //Location p = new Location(7,8);
+        //Location p = new Location(6,7);
         ghost.moveUp();
         
         assertEquals (7, ghost.getCoordinate().getXlocation(), 0.001);
