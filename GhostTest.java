@@ -7,7 +7,6 @@ import org.junit.Test;
 import javafx.embed.swing.JFXPanel;
 
 
-
 public class GhostTest {
 
     @Test
