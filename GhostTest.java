@@ -30,13 +30,14 @@ public class GhostTest extends Application {
 
 
 	@Test
-    	public void testConstructor()
+    public void testConstructor()
 	{
 		Location ghostlocation = new Location(8,6);
         Ghost ghost = new Ghost(ghostlocation);
         assertEquals (6, ghost.getCoordinate().getYlocation(), 0.001); //testing if ghost's ylocation has been set
         assertEquals (8, ghost.getCoordinate().getXlocation(), 0.001); //testing if ghost's xlocation has been set
     }
+
 
 
 	@Test
