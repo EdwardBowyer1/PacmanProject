@@ -6,6 +6,7 @@ import javafx.application.Application;
 import javafx.embed.swing.JFXPanel;
 import javafx.stage.Stage;
 
+
 public class GhostTest extends Application {
 
 	public void start(Stage arg0) throws NullPointerException{
