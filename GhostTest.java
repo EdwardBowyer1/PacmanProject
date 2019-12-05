@@ -21,7 +21,6 @@ public class GhostTest extends Application {
 	}
 
 	
-	
 	@Before
 	public void executedBeforeEach()
 	{
