@@ -25,7 +25,7 @@ public class FxGame extends Application{
       Map map = new Map();
        
        map.generateMap(primaryStage).show();
-       
+       primaryStage.setTitle("P A C M A N");
        map.startTimeline();
 
 
