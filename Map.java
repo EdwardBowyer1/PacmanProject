@@ -78,8 +78,6 @@ public class Map {
 
 		initializeObstacles();
 
-		//stage.setTitle("Pacman");
-
 
 		// HERE IS WHERE THE INITIAL GRID POPULATING OCCURS
 		initGrid();
