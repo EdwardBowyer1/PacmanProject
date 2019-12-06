@@ -7,7 +7,7 @@ import javafx.stage.Stage;
 /**JAVADOC: GUI version of PacMan */
 /**
  * 
- * @author Sami
+ * @author Sami and medhanie
  *
  */
 public class FxGame extends Application{
