@@ -1,6 +1,7 @@
 import static org.junit.Assert.*;
 import static org.junit.Assert.assertEquals;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import javafx.application.Application;
 import javafx.embed.swing.JFXPanel;
@@ -10,27 +11,27 @@ import javafx.stage.Stage;
  * This is a junit test class for Ghost.java, it tests the move methods of the Ghost class.
  * @author Medhanie 
  */
-public class GhostTest extends Application {
+public class GhostTest  {
 
-	public void start(Stage arg0) throws NullPointerException{
+	public static void start(){
 	try {
 		Map map = new Map();
-		map.generateMap(arg0);
+		map.generateMap(Map.stage);
 		}
 	
-	catch(NullPointerException e) {
-        System.out.println("");
+	catch(Exception e) {
+        System.out.println("caught exception");
         }
 	}
 
 	/**
 	 * initializes the Stage and executes before each test method
 	 */
-	@Before
-	public void executedBeforeEach()
+	@BeforeClass
+	public static void executedBeforeEach()
 	{
 		new JFXPanel();
-		start(Map.stage);
+		start();
 	}
 
 
@@ -159,8 +160,6 @@ public class GhostTest extends Application {
 	@Test
 	public void canNotMoveRight()
 	{
-		new JFXPanel();
-		start(Map.stage);
 		Location ghostlocation = new Location(6,2);
         Ghost ghost = new Ghost(ghostlocation);
 		assertFalse(ghost.moveRight());
