@@ -6,7 +6,10 @@ import javafx.application.Application;
 import javafx.embed.swing.JFXPanel;
 import javafx.stage.Stage;
 
-
+/**
+ * This is a junit test class for Ghost.java, it tests the move methods of the Ghost class.
+ * @author Medhanie 
+ */
 public class GhostTest extends Application {
 
 	public void start(Stage arg0) throws NullPointerException{
@@ -20,7 +23,9 @@ public class GhostTest extends Application {
         }
 	}
 
-	
+	/**
+	 * initializes the Stage and executes before each test method
+	 */
 	@Before
 	public void executedBeforeEach()
 	{
@@ -29,17 +34,22 @@ public class GhostTest extends Application {
 	}
 
 
-	@Test
+    /**
+	 * testing the constructor 
+	 */
+    @Test
     public void testConstructor()
 	{
 		Location ghostlocation = new Location(8,6);
         Ghost ghost = new Ghost(ghostlocation);
-        assertEquals (6, ghost.getCoordinate().getYlocation(), 0.001); //testing if ghost's ylocation has been set
-        assertEquals (8, ghost.getCoordinate().getXlocation(), 0.001); //testing if ghost's xlocation has been set
+        assertEquals (6, ghost.getCoordinate().getYlocation(), 0.001); //testing if ghost's row location has been set to 6
+        assertEquals (8, ghost.getCoordinate().getXlocation(), 0.001); //testing if ghost's column location has been set to 8
     }
 
 
-
+    /**
+	 * testing if ghost's row location Decrements by 1 when it moves up
+	 */
 	@Test
 	public void hasMovedUp() 
 	{
@@ -49,7 +59,9 @@ public class GhostTest extends Application {
 		assertEquals (7, ghost.getCoordinate().getXlocation(), 0.001);
 	}
 
-	
+	/**
+	 * testing if ghost can move up when there is no obstacle above it
+	 */
 	@Test
 	public void canMoveUp() 
 	{
@@ -58,16 +70,20 @@ public class GhostTest extends Application {
 		assertTrue(ghost.moveUp());
 	}
 
-	
+	/**
+	 * testing if ghost can not move up due to an obstacle above it
+	 */
 	@Test
 	public void canNotMoveUp() 
 	{
 		Location ghostlocation = new Location(3,9);
-        Ghost ghost = new Ghost(ghostlocation);
-		assertFalse(ghost.moveUp());
+        Ghost ghost = new Ghost(ghostlocation); 
+		assertFalse(ghost.moveUp());    //expecting ghost unable to move up since the new position to be at (2,9) is an obstacle
 	}
 
-	
+	/**
+	 * testing if ghost's row location increments by 1 when it moves down
+	 */
 	@Test
 	public void hasMovedDown() 
 	{
@@ -96,7 +112,9 @@ public class GhostTest extends Application {
 		assertFalse(ghost.moveDown());
 	}
 
-
+    /**
+	 * testing if ghost's column location Decrements by 1 when it moves left
+	 */
 	@Test
 	public void hasMovedLeft() 
 	{
@@ -126,7 +144,9 @@ public class GhostTest extends Application {
 
 
 
-
+    /**
+	 * testing if ghost's column location increments by 1 when it moves right
+	 */
 	@Test
 	public void canMoveRight()
 	{
