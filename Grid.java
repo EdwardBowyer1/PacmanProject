@@ -1,3 +1,4 @@
+import javafx.embed.swing.JFXPanel;
 
 /**
  * This is the class that creates a grid based on the value in the Constants class. 
@@ -10,7 +11,7 @@ public class Grid {
 	/**
 	 * instance variables
 	 */
-	private  Cell [] [] grid;
+	private  Cell [][] grid;
 	
 	/**
 	 * Constructors
@@ -40,7 +41,8 @@ public class Grid {
 	 * Getters and setters
 	 * @param cell
 	 */
-	public void addCell(Cell cell){ 
+	public void addCell(Cell cell)
+	{ 
 		
 		grid [(int)cell.getCoordinate().getXlocation()][(int)cell.getCoordinate().getYlocation()] = cell;
 		
@@ -100,5 +102,27 @@ public class Grid {
 			return false;
 	}
 	
+	public Cell[][] getGrid()  //for the test class
+	{
+		return grid;
+	}
+	
+	public void initDefGrid() //for test
+	{
+		
+		for (int i =0;i< Constants.gridHeight;i++)
+		{
+            for (int j =0;j< Constants.gridWidth;j++)
+            {
+            	Location celocation = new Location(i,j);
+        		Cell cell = new Cell(celocation, 0);
+        		addCell(cell);
+        		
+            }
+		
+		}
+		
+		
+	}
 
 }
