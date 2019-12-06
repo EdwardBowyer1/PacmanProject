@@ -1,6 +1,4 @@
 
-//import java.awt.Color;
-//import java.awt.Font;
 import java.util.ArrayList;
 
 import javafx.animation.KeyFrame;
@@ -292,7 +290,7 @@ public class Map {
 		Text over = setText(new Location(Constants.gridHeight/2 ,Constants.gridWidth/2 -1.7), "GAME OVER",40 );
 		over.setFill(Color.RED);
 		score = setText(new Location(Constants.gridHeight/2 +2,Constants.gridWidth/2 - 5) ,"Score : "+ Integer.toString(player.getScore()),30);
-		highscore = setText(new Location(Constants.gridHeight/2 +2,Constants.gridWidth/2 + 3),"High Score : " + Integer.toString(player.getHighscore()),30); // + retrieveHighscore());
+		highscore = setText(new Location(Constants.gridHeight/2 +2,Constants.gridWidth/2 + 2),"High Score : " + Integer.toString(player.getHighscore()),30); // + retrieveHighscore());
 		Text restart =  setText(new Location(Constants.gridHeight/2 +4,Constants.gridWidth/2 -3.5),"PRESS SPACEBAR TO RESTART  ",30); // + retrieveHighscore());
 
 
