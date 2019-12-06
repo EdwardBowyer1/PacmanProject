@@ -117,8 +117,8 @@ public class Map {
 		for(int i = 2; i<Constants.gridWidth-2; i++)
 		{
 			for(int j=2; j<Constants.gridHeight-1; j++) {
-				if(i!=7 && j%2==0) {
-					obstacles.add(new Location(j, i));
+				if(i!=7 && j%2==0 && i != 10 && i!=4) {
+					obstacles.add(new Location(i, j));
 
 				}
 		}
