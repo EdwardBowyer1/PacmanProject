@@ -16,20 +16,16 @@ public class GridTest
 	JFXPanel j = new JFXPanel();
 	
 	@Test
-	public void testDefaultConstructor() 
+	public void testDefaultConstructor() //tests default constructor
 	{
-		//JFXPanel j = new JFXPanel(); //why does this make it work??
 		Grid test = new Grid();
-		//test = 
 		
 		assertEquals(15,test.getGrid().length);
-		//assertEquals(15,test.getGrid().length);
 	}
 	
 	@Test
 	public void testCopyConstructor() //test if new grid is == old grid
 	{
-		//JFXPanel jj = new JFXPanel();
 		
 		Grid oldgrid = new Grid();
 		oldgrid.initDefGrid();
@@ -43,7 +39,6 @@ public class GridTest
 	@Test
 	public void testIsEmpty() //test if cell is an empty cell
 	{
-		//JFXPanel j = new JFXPanel();
 		
 		Grid test = new Grid();
 		test.initDefGrid();
@@ -73,7 +68,6 @@ public class GridTest
 	@Test
 	public void addCell() //test if cell is an empty cell
 	{
-		//JFXPanel j = new JFXPanel();
 		
 		Grid test = new Grid();
 		
