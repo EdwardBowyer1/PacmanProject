@@ -1,17 +1,17 @@
 
 public abstract class GameObject {
-	
+
 	//Instance
 	private Location coordinate;
-	
-	
+
+
 	//constructor
-	
+
 	public GameObject(Location toCopy)
 	{
 		setCoordinate(toCopy); 
 	}
-	
+
 	public String toString()
 	{
 		return coordinate.toString();
@@ -31,7 +31,7 @@ public abstract class GameObject {
 	public void setCoordinate(Location coordinate) {
 		this.coordinate = new Location(coordinate);
 	}
-	
-	
-	
+
+
+
 }

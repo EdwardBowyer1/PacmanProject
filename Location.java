@@ -1,8 +1,6 @@
-import javafx.geometry.Rectangle2D;
-import javafx.stage.Screen;
 /**
  * 
- * @author Sami and Zeke
+ * @author Sami, Zeke, Medhanie
  *
  */
 public class Location {
@@ -12,15 +10,15 @@ public class Location {
 	 */
 	private double xlocation; // i in matrix notation  ******************************************!!
 	private double ylocation; // j in matrix notation	*****************************************!!
-	
-	
+
+
 	private double pixelW;
 	private double pixelH;
-	
+
 	public static int tracker = 0;
 
 
-	
+
 	/**
 	 * constructors
 	 */
@@ -43,7 +41,7 @@ public class Location {
 	{
 		this(old.xlocation,old.ylocation);
 	}
-	
+
 	/**
 	 * 
 	 * @param old-> Location to be compared current location variable
@@ -56,18 +54,18 @@ public class Location {
 		else
 			return false;
 	}
-		
+
 	/**
 	 * 
 	 * @param xChange increments/decrements the row of the location 
 	 * @param yChange increments/decrements the column of the location 
 	 */
 	protected void changeLocation(int xChange, int yChange) //consider changing to protected instead
-		{
-			setXlocation(xlocation + xChange);
-			setYlocation(ylocation + yChange);
-		}
-	
+	{
+		setXlocation(xlocation + xChange);
+		setYlocation(ylocation + yChange);
+	}
+
 	/**
 	 * Returns a string of of the i and j location 
 	 */
@@ -113,7 +111,7 @@ public class Location {
 	public void setPixelW(double pixelW) {
 		this.pixelW = pixelW;
 	}
-	
-	
+
+
 }
 

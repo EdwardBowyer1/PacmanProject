@@ -2,7 +2,6 @@ import java.util.Random;
 
 import javafx.scene.Node;
 import javafx.scene.image.ImageView;
-import javafx.scene.shape.Circle;
 
 /**
  * THis class keeps manages its own location and returns its representation through it's node.
@@ -11,19 +10,19 @@ import javafx.scene.shape.Circle;
  */
 public class Ghost extends Character {
 
-	
+
 
 	//instance variables
 	private Node node;
 	private  ImageView redGhostImage = new ImageView(Constants.GIFRedGhost);
 	private  ImageView blueGhostImage = new ImageView(Constants.GIFBlueGhost);
 
-	
+
 	// constructor
 
 	public Ghost(Location toCopy) {
 		super(toCopy);
-		
+
 	}
 
 	/**
@@ -38,67 +37,67 @@ public class Ghost extends Character {
 		double ghostXlocation = getCoordinate().getYlocation();			// Ylocation represents width of grid "Traditional x axis"
 		double ghostYlocation = getCoordinate().getXlocation();			//Xlocation represents height of grid "traditional y axis"
 		Random rand = new Random();
-	    int randomNum = rand.nextInt((3 - 0) + 1) + 0;
+		int randomNum = rand.nextInt((3 - 0) + 1) + 0;
 
-	    if (pacYlocation > ghostYlocation ){
+		if (pacYlocation > ghostYlocation ){
 
-	    	 if (pacXlocation > ghostXlocation ){
+			if (pacXlocation > ghostXlocation ){
 
-	    		 randomNum = rand.nextInt((1 - 0) + 1) + 0;
+				randomNum = rand.nextInt((1 - 0) + 1) + 0;
 
-	    		 if (randomNum == 0)
-	    			 moveDown();
-	    		 else
-	    			 moveRight();
+				if (randomNum == 0)
+					moveDown();
+				else
+					moveRight();
 
-	 	    }
+			}
 
-	    	 if (pacXlocation <= ghostXlocation ){
+			if (pacXlocation <= ghostXlocation ){
 
-	    		 randomNum = rand.nextInt((1 - 0) + 1) + 0;
+				randomNum = rand.nextInt((1 - 0) + 1) + 0;
 
-	    		 if (randomNum == 0)
-	    			 moveDown();
-	    		 else
-	    			 moveLeft();
+				if (randomNum == 0)
+					moveDown();
+				else
+					moveLeft();
 
-	 	    }
+			}
 
-	    }else if (pacYlocation <= ghostYlocation){
+		}else if (pacYlocation <= ghostYlocation){
 
-	    	 if (pacXlocation >= ghostXlocation){
+			if (pacXlocation >= ghostXlocation){
 
-	    		 randomNum = rand.nextInt((1 - 0) + 1) + 0;
+				randomNum = rand.nextInt((1 - 0) + 1) + 0;
 
-	    		 if (randomNum == 0)
-	    			 moveUp();
-	    		 else
-	    			 moveRight();
+				if (randomNum == 0)
+					moveUp();
+				else
+					moveRight();
 
-	 	    }
+			}
 
-	    	 if (pacXlocation < ghostXlocation){
+			if (pacXlocation < ghostXlocation){
 
-	    		 randomNum = rand.nextInt((1 - 0) + 1) + 0;
+				randomNum = rand.nextInt((1 - 0) + 1) + 0;
 
-	    		 if (randomNum == 0)
-	    			 moveUp();
-	    		 else
-	    			 moveLeft();
+				if (randomNum == 0)
+					moveUp();
+				else
+					moveLeft();
 
-	 	    }
+			}
 
-	    }
+		}
 
-	    if (ghostYlocation == pacYlocation && ghostXlocation == pacXlocation ){
-	    	Map.gameOver();
+		if (ghostYlocation == pacYlocation && ghostXlocation == pacXlocation ){
+			Map.gameOver();
 		}
 
 
 	}
-/**
- * Decrements the the row location (i in matrix notation)
- */
+	/**
+	 * Decrements the the row location (i in matrix notation)
+	 */
 	public  boolean moveUp(){
 
 		double ghostXlocation = getCoordinate().getYlocation();
@@ -109,7 +108,7 @@ public class Ghost extends Character {
 		Location temp = new Location(ghostYlocation-1, ghostXlocation);
 		super.setCoordinate(temp);
 
-    	return true;
+		return true;
 
 	}
 	/**
@@ -124,8 +123,8 @@ public class Ghost extends Character {
 
 		Location temp = new Location(ghostYlocation+1, ghostXlocation);
 		super.setCoordinate(temp);
-   
-    	return true;
+
+		return true;
 
 	}
 
@@ -143,7 +142,7 @@ public class Ghost extends Character {
 		Location temp = new Location(ghostYlocation, ghostXlocation-1);
 		super.setCoordinate(temp);
 
-    	return true;
+		return true;
 
 
 	}
@@ -160,8 +159,8 @@ public class Ghost extends Character {
 
 		Location temp = new Location(ghostYlocation, ghostXlocation+1);
 		super.setCoordinate(temp);
-	
-    	return true;
+
+		return true;
 
 	}
 	/**
@@ -187,7 +186,7 @@ public class Ghost extends Character {
 
 		node = redGhostImage;
 
-	return node;
+		return node;
 
 	}
 
@@ -209,7 +208,7 @@ public class Ghost extends Character {
 
 		node = blueGhostImage;
 
-	return node;
+		return node;
 
 	}
 }

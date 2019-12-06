@@ -6,17 +6,17 @@
  */
 public abstract class Character extends GameObject
 {
-	
-//----Constructor--------------------------------------
-	
+
+	//----Constructor--------------------------------------
+
 	public Character(Location onGrid)
 	{
 		super(onGrid);
-		
+
 	}
 
-//----Methods-------------------------------------------
-	
+	//----Methods-------------------------------------------
+
 	/**
 	 *  Functions to be implemented for every new character added to the game
 	 * @return  True if the fucntion was able to move(not hit an obstacle, false otherwise.
@@ -24,11 +24,11 @@ public abstract class Character extends GameObject
 	public abstract boolean moveUp();	
 
 	public abstract boolean moveDown();
-	
+
 	public abstract boolean moveRight();
-	
+
 	public abstract boolean moveLeft();
-	
+
 
 }
 
