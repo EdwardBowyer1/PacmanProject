@@ -4,10 +4,22 @@
 
 This repository contains two versions of the PacMan game developed for CPSC 233: a text-based version and a GUI version. Both versions track scores and highscores and require JavaFX to be installed on your system.
 
+### Gameplay
+
+![Gameplay GIF](resources/gameplay.gif)
+
+### Game Over Screen
+
+![Game Over](resources/game_over.png)
+
+### Text Version Gameplay
+
+![Text Gameplay](resources/text_gameplay.png)
+
 ## Features
 
 - Two versions: Text and GUI
-- Score and highscore tracking
+- Score and high-score tracking
 - Collision detection
 - Simple and intuitive controls
 
@@ -15,7 +27,7 @@ This repository contains two versions of the PacMan game developed for CPSC 233:
 
 Before running the game, ensure you have the following installed:
 
-- Java Development Kit (JDK)
+- Java Development Kit (JDK 1.8)
 - JavaFX
 
 ## Installation
@@ -69,6 +81,7 @@ Before running the game, ensure you have the following installed:
 
 - **Controls:** Follow the printed instructions on the screen.
 - **Objective:** Similar to the GUI version, navigate PacMan, eat food items, and avoid ghosts.
+- **Features:** Collision detection ensures PacMan cannot pass through walls, and food items disappear upon being eaten.
 
 ## Resources
 
@@ -83,20 +96,7 @@ Before running the game, ensure you have the following installed:
 - `FinalProjectProposal.pdf`: Project proposal document.
 - `Team Contract.docx`: Team contract agreement.
 
-## Screenshots and GIFs
 
-### GUI Version Gameplay
 
-![GUI Gameplay](resources/gui_gameplay.png)
 
-### Game Over Screen
 
-![Game Over](resources/game_over.png)
-
-### Text Version Gameplay
-
-![Text Gameplay](resources/text_gameplay.png)
-
-### GIF
-
-![Gameplay GIF](resources/gameplay.gif)
