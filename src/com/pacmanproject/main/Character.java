@@ -1,3 +1,4 @@
+package com.pacmanproject.main;
 
 /**
  * This class extends game object and contains abstract methods to be implemented by the charaters of the game.

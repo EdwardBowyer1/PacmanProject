@@ -1,6 +1,12 @@
+package com.pacmanproject.test;
 import static org.junit.Assert.*;
 
 import org.junit.Test;
+
+import com.pacmanproject.main.Cell;
+import com.pacmanproject.main.Grid;
+import com.pacmanproject.main.Location;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;

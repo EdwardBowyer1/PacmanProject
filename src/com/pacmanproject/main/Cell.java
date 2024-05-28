@@ -1,3 +1,4 @@
+package com.pacmanproject.main;
 import javafx.scene.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.shape.Circle;

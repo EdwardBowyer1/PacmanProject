@@ -1,3 +1,4 @@
+package com.pacmanproject.main;
 //Imports-------------------------------------------
 import java.util.Scanner;
 

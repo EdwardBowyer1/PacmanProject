@@ -1,3 +1,5 @@
+package com.pacmanproject.main;
+
 /**
  * 
  * @author Sami, Zeke, Medhanie

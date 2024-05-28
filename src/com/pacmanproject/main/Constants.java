@@ -1,3 +1,4 @@
+package com.pacmanproject.main;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 

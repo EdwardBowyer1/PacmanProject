@@ -1,3 +1,5 @@
+package com.pacmanproject.main;
+
 /**
  * This is the class that creates a grid based on the value in the Constants class. 
  * It's a 2D array of cells which is how the map retains it;s values and dynamically changes.

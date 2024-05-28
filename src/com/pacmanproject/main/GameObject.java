@@ -1,3 +1,4 @@
+package com.pacmanproject.main;
 
 public abstract class GameObject {
 

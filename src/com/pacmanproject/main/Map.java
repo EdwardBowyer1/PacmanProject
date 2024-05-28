@@ -1,3 +1,4 @@
+package com.pacmanproject.main;
 
 import java.util.ArrayList;
 

@@ -1,3 +1,4 @@
+package com.pacmanproject.main;
 
 
 import javafx.application.Application;

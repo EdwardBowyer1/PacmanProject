@@ -1,3 +1,4 @@
+package com.pacmanproject.main;
 import java.util.Random;
 
 import javafx.scene.Node;
